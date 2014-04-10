@@ -1,0 +1,261 @@
+gtk-color-scheme =
+"bg_color:#212121\nfg_color:#BDBDBD\nbase_color:#2C2C2C\ntext_color:#BDBDBD\nselected_fg_color:#FFA203\nselected_bg_color:#3C3C3C\nwindow_frame:#20187B"
+
+style "default"
+{
+	fg[NORMAL]              = @fg_color
+    fg[ACTIVE]              = @fg_color
+    fg[INSENSITIVE]         = mix (0.4, @fg_color, shade (0.85, @bg_color)) #shaded to bg[INSENSITIVE]
+    fg[PRELIGHT]            = @selected_fg_color
+    fg[SELECTED]            = @selected_fg_color
+        
+	bg[NORMAL]              = @bg_color
+	bg[ACTIVE]              = shade (0.9, @bg_color)
+    bg[INSENSITIVE]         = shade (0.95, @bg_color)
+    bg[PRELIGHT]            = shade (1.0, @selected_bg_color)
+    bg[SELECTED]            = @selected_bg_color
+
+    base[NORMAL]            = @base_color
+    base[ACTIVE]            = shade (1.0, @selected_bg_color)
+    base[INSENSITIVE]       = shade (0.95, @base_color)
+    base[PRELIGHT]          = @bg_color
+	base[SELECTED]          = @selected_bg_color
+        
+    text[NORMAL]            = @text_color
+    text[ACTIVE]            = @text_color
+    text[INSENSITIVE]       = mix (0.5, @text_color, @base_color)
+    text[PRELIGHT]          = @text_color
+    text[SELECTED]          = @selected_fg_color
+	
+	GtkScrolledWindow ::scrollbar-spacing            = 0
+    GtkScrolledWindow ::scrollbar-within-bevel       = 0
+    GtkScrollbar::min-slider-length = 30
+    #GtkScrollbar::activate-slider = 1
+    GtkScrollbar::slider-width = 10
+    GtkScrollbar::trough-border = 2
+    GtkScrollbar::has-backward-stepper = 0 
+    GtkScrollbar::has_secondary_backward_stepper = 0 
+    GtkScrollbar::has-forward-stepper = 0 
+    GtkScrollbar::has_secondary_forward_stepper = 0
+
+
+	GtkRange::trough_border = 0
+	GtkRange::slider_width = 15
+	GtkRange::stepper_size = 15
+
+	GtkCheckButton::indicator_size=13
+	GtkCheckMenuItem::indicator_size=13
+	GtkRadioButton::indicator_size=14
+
+	GtkNotebook::tab_vborder = 1
+	GtkNotebook::tab_hborder = 1
+	GtkNotebook::tab-overlap =-1
+	xthickness = 1
+	ythickness = 1
+
+	GtkMenu::horizontal_padding=0
+	GtkMenu::vertical_padding=0
+	
+	GtkWidget::link-color = "#b5bae1"
+    GtkWidget::visited-link-color = "#b5bae1"
+
+	engine "murrine"
+	{
+        arrowstyle      = 2
+        #cellstyle = 0
+        colorize_scrollbar = FALSE
+        #expanderstyle = 1
+        focusstyle = 0
+        glazestyle = 0
+        gradient_colors     =  FALSE
+        handlestyle = 0
+        lightborderstyle    = 0
+        listviewheaderstyle = 2
+        listviewstyle = 2
+        menubaritemstyle = 0
+		menubarstyle = 0
+		menuitemstyle = 0
+		menustyle = 0
+		progressbarstyle = 1
+		reliefstyle     = 0
+		roundness       = 2
+		scrollbarstyle = 3
+        separatorstyle = 0
+        sliderstyle = 1
+        #stepperstyle = 0
+        toolbarstyle = 0
+        
+        gradient_shades     = {1.0,1.0,1.0,1.0}
+        highlight_shade     = 1.0
+        glow_shade      = 1.0
+        lightborder_shade       = 1.4
+        trough_shades           = { 1.0, 1.0 }
+        trough_border_shades    = { 1.0, 1.0 }
+        border_shades       = { 1.0, 1.0}     # slider border outline
+        shadow_shades       = { 0.6, 0.6 }
+        contrast        = 1.0           # no trough-border
+        prelight_shade      = 1.0
+    }
+}
+
+style "menu-item"
+{
+	ythickness = 2
+	xthickness = 2
+
+    fg[PRELIGHT]          = @selected_fg_color
+    
+    engine "murrine"
+    {
+		roundness = 0
+		contrast = 0.0
+    }
+}
+
+style "separator-menu-item"
+{
+	GtkSeparatorMenuItem::horizontal-padding = 0
+    GtkWidget::wide-separators = 1
+    GtkWidget::separator-width = 4
+    GtkWidget::separator-height = 4
+    xthickness = 5
+    ythickness = 0
+    
+	#bg[NORMAL]   = @fg_color
+	
+	engine "murrine"
+    {
+		contrast = 1.0
+    }
+}
+
+style "menu" 
+{
+	ythickness = 0
+	xthickness = 0
+	
+	fg[PRELIGHT]          = @selected_fg_color
+	
+	engine "murrine"
+    {
+    		roundness = 0
+		contrast = 0.0
+    }
+} 
+
+style "entry"
+{
+	bg[SELECTED] = mix(0.35, @selected_bg_color, @base_color)
+	fg[SELECTED] = @selected_fg_color
+}
+
+style "progress-bar"
+{
+	bg[PRELIGHT] = @fg_color
+	bg[SELECTED] = shade ( 0.8, @selected_fg_color )
+	bg[NORMAL]   = @base_color
+	fg[PRELIGHT] = shade ( 1.2, @selected_bg_color )
+	
+	engine "murrine"
+	{
+	        border_shades       = { 1.32, 1.32}
+	        lightborder_shade       = 1.0
+			shadow_shades       = { 0.8, 0.8 }
+	}
+}
+
+style "scroll-bar"
+{
+	bg[PRELIGHT] = shade ( 0.55, @selected_fg_color )
+	bg[NORMAL]   = shade ( 0.5, @selected_fg_color )
+	
+	engine "murrine"
+	{
+		roundness       = 0
+	    lightborder_shade       = 1.0
+        shadow_shades       = { 1.0, 1.0 }
+	}
+}
+
+style "scale"
+{
+    bg[NORMAL] = shade (1.0, @selected_bg_color)
+    bg[PRELIGHT] = shade (1.1, @selected_bg_color)
+    bg[ACTIVE] = shade (0.90, @bg_color)
+    bg[SELECTED] = shade (1.80, @bg_color)
+    bg[INSENSITIVE] = shade (1.0, @bg_color)
+    fg[NORMAL] = @fg_color
+    
+	engine "murrine"
+	{
+	    lightborder_shade       = 1.4
+        shadow_shades       = { 0.8, 0.8 }
+	}
+}
+
+style "hscale" = "scale" {}
+style "vscale" = "scale" {}
+
+style "status-bar"
+{
+    xthickness = 2
+    ythickness = 2
+}
+
+
+class "GtkScale" style "scale"
+class "GtkVScale" style "scale"
+class "GtkHScale" style "scale"
+class "GtkScrollbar" style "scroll-bar"
+class "GtkWidget" style "default"
+class "GtkMenu" style "menu"
+class "GtkEntry" style "entry"
+class "GtkProgressBar" style "progress-bar"
+
+widget_class "*<GtkMenuItem>*" style "menu-item"
+widget_class "*<GtkStatusbar>*" style "status-bar"
+widget_class "*<GtkSeparatorMenuItem>*" style "separator-menu-item"
+
+
+# Work around for http://bugzilla.gnome.org/show_bug.cgi?id=382646
+# Note that the work around assumes that the combobox is _not_ in
+# appears-as-list mode.
+# This style does not affect GtkComboBoxEntry, it does have an effect
+# on comboboxes in appears-as-list mode though.
+style "text-is-fg-color-workaround"
+{
+        text[NORMAL]              = @fg_color
+        text[ACTIVE]              = @fg_color
+        text[INSENSITIVE]         = mix (0.4, @fg_color, shade (0.85, @bg_color)) #shaded to bg[INSENSITIVE]
+        text[PRELIGHT]            = @fg_color
+        text[SELECTED]            = @selected_fg_color
+}
+widget_class "*.<GtkComboBox>.<GtkCellView>"   style "text-is-fg-color-workaround"
+
+style "menuitem-text-is-fg-color-workaround"
+{
+        text[NORMAL]              = @fg_color
+        text[ACTIVE]              = @fg_color
+        text[INSENSITIVE]         = mix (0.4, @fg_color, shade (0.85, @bg_color)) #shaded to bg[INSENSITIVE]
+        text[PRELIGHT]            = @selected_fg_color
+        text[SELECTED]            = @selected_fg_color
+}
+widget "*.gtk-combobox-popup-menu.*"   style "menuitem-text-is-fg-color-workaround"
+
+# Work around the usage of GtkLabel inside GtkListItems to display text.
+# This breaks because the label is shown on a background that is based on the
+# base color set.
+style "fg-is-text-color-workaround"
+{
+        fg[NORMAL]            = @text_color
+        fg[ACTIVE]            = @text_color
+        fg[PRELIGHT]          = @text_color
+        fg[SELECTED]          = @selected_fg_color
+        fg[INSENSITIVE]       = mix (0.5, @text_color, @base_color)
+}
+widget_class "*<GtkListItem>*" style "fg-is-text-color-workaround"
+# The same problem also exists for GtkCList and GtkCTree
+# Only match GtkCList and not the parent widgets, because that would also change the headers.
+widget_class "*<GtkCList>" style "fg-is-text-color-workaround"
+
+
