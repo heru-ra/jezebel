@@ -1,0 +1,53 @@
+* { line-height: 12px }
+
+body { background: #212121; color: #BDBDBD; font: 7pt "Verdana"; margin: 0; padding: 23px 0 23px 0 }
+
+div.wrapper { width: 100%; text-align: center }
+div.grid { display: inline-block; width: 568px; margin-right: 28px }
+
+div.row-1, div.row-3, div.col-1, div.col-2 { margin-left: 28px; text-align: left }
+div.row-3, div.row-2 { margin-top: 12px }
+div.col-1, div.col-2 { float: left }
+div.row-1 { width: 540px }
+
+
+/*  Use this to change the height of row 2 and it's 2 info column children.
+ *  -- The row and columns don't auto adjust in height because of
+ *  how I had to float the columns left, and because the shows feed div
+ *  needs to be forced to overflow scroll. There's probably a cleaner way
+ *  to handle this, but this works for now.  */
+div.row-2 { height:396px }
+
+
+div.col-1 { width: 140px; padding-top: 3px }
+div.col-2 { width: 372px; height: inherit }
+div.row-3 { width: 538px }
+
+div.links { padding-bottom: 7px }
+div.show_feed { height: inherit; padding-left: 2px; overflow: auto; overflow-x: hidden }
+div.vertlabel { height: 0px; width:200px; text-align:right; position: relative; top: 85px; left: -115px }
+div.row-3 div.horizlabel { float: left }
+
+div.show_feed, input, textarea { border:1px solid #191919; background: #2C2C2C }
+div.row-1 input { width: 453px }
+div.row-1 select { width: 82px }
+div.row-3 textarea { font: 8pt "Verdana"; width: 100%; resize: vertical }
+div.row-3 button { float: right; margin-top: 8px; margin-right: -2px }
+
+h1 { margin: 0; color: #FFF; font: 20pt "Audimat Mono"; font-weight: bold }
+div.vertlabel h1 { transform: rotate(-90deg); -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg) }
+h2, strong { color: #FFA203; font: 7pt "Audimat Mono"; font-weight: normal; margin: 0 }
+
+div.show_feed strong { display: table-cell; width: 32px }
+div.col-1 strong { float:left; padding: 1px 4px 0 0; margin-top: 1px }
+em { font-style: normal; color: #FFF }
+
+ul { list-style-type: none; padding: 0; margin: 0 }
+div.links ul { padding: 2px 6px 5px 17px }
+
+div.show_feed li { display: table-row }
+
+li a { color: #BDBDBD; text-decoration: none; padding: 0 2px 0 2px }
+div.links li a { display: block }
+div.show_feed li a { display: table-cell }
+li a:hover, li a:hover > em { color: #FFA203; background: #3C3C3C }
