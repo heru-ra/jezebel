@@ -1,6 +1,6 @@
 A couple things to note:
 
-Both the "cache" folder and the "scratchpad" filed must be given
+Both the "cache" folder and the "scratchpad" file must be given
 CHMOD 777 permissions, so they can be written to properly.
 
 This is an unfinished project, particularly the PHP portions as
