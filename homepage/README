@@ -1,0 +1,15 @@
+A couple things to note:
+
+Both the "cache" folder and the "scratchpad" filed must be given
+CHMOD 777 permissions, so they can be written to properly.
+
+This is an unfinished project, particularly the PHP portions as
+I know they could be drastically cleaned up and made more efficient
+and flexible. If you like what you see, check back for updates.
+
+The LastRSS plugin definitely has some limitations in its current
+release, that make reading values from more complex tags not
+possible. I've worked around this as best as I can even if in
+sloppy ways. I'm considering modifying the plugin myself, so
+that that my parsing and formatting routines aren't such a mess.
+If I do so, I will definitely fork my work.
