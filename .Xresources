@@ -1,0 +1,47 @@
+*background: #212121
+*foreground: #bdbdbd
+
+! black
+*color0: #212121
+*color8: #212121
+
+! red
+*color1: #ae4551
+*color9: #e1b5ba
+
+! green
+*color2: #51ae45
+*color10: #bae1b5
+
+! yellow
+*color3: #b4913f
+*color11: #e1dcb5
+
+! blue
+*color4: #4551ae
+*color12: #b5bae1
+
+! magenta
+*color5: #a245ae
+*color13: #dcb5e1
+
+! cyan
+*color6: #45aea2
+*color14: #b5e1dc
+
+! white
+*color7: #d4d4d4
+*color15: #f4f4f4
+
+URxvt.font: xft:Audimat Mono:size=8
+URxvt.letterSpace: -1
+URxvt.scrollBar: false
+
+! font settings --------------------------------------------------------------
+
+Xft.autohint: true
+Xft.antialias: true
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
