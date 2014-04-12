@@ -19,11 +19,11 @@ div.row-1 { width: 540px }
 div.row-2 { height:396px }
 
 
-div.col-1 { width: 140px; padding-top: 3px }
+div.col-1 { width: 140px }
 div.col-2 { width: 372px; height: inherit }
 div.row-3 { width: 538px }
 
-div.links { padding-bottom: 7px }
+div.links { padding: 3px 0 7px 0 }
 div.show_feed { height: inherit; padding-left: 2px; overflow: auto; overflow-x: hidden }
 div.vertlabel { height: 0px; width: 200px; text-align: right; position: relative; top: 85px; left: -115px }
 div.row-3 div.horizlabel { float: left }
