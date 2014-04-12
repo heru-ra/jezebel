@@ -25,10 +25,10 @@ div.row-3 { width: 538px }
 
 div.links { padding-bottom: 7px }
 div.show_feed { height: inherit; padding-left: 2px; overflow: auto; overflow-x: hidden }
-div.vertlabel { height: 0px; width:200px; text-align:right; position: relative; top: 85px; left: -115px }
+div.vertlabel { height: 0px; width: 200px; text-align: right; position: relative; top: 85px; left: -115px }
 div.row-3 div.horizlabel { float: left }
 
-div.show_feed, input, textarea { border:1px solid #191919; background: #2C2C2C }
+div.show_feed, input, textarea { border: 1px solid #191919; background: #2C2C2C }
 div.row-1 input { width: 453px }
 div.row-1 select { width: 82px }
 div.row-3 textarea { font: 8pt "Verdana"; width: 100%; resize: vertical }
@@ -39,7 +39,7 @@ div.vertlabel h1 { transform: rotate(-90deg); -webkit-transform: rotate(-90deg);
 h2, strong { color: #FFA203; font: 7pt "Audimat Mono"; font-weight: normal; margin: 0 }
 
 div.show_feed strong { display: table-cell; width: 32px }
-div.col-1 strong { float:left; padding: 1px 4px 0 0; margin-top: 1px }
+div.col-1 strong { float: left; padding: 1px 4px 0 0; margin-top: 1px }
 em { font-style: normal; color: #FFF }
 
 ul { list-style-type: none; padding: 0; margin: 0 }

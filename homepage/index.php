@@ -12,7 +12,6 @@
         form.action = document.getElementById('stype').value+document.getElementById('sinput').value;
         
         // if Google option is selected, we must use GET method instead of POST
-        // because Google likes to be a pain in my ass and upset the status quo
         if (document.getElementById('stype').value === 'https://encrypted.google.com/#q=') form.method="GET";
       }
     </script>
@@ -45,21 +44,21 @@
               </ul>
               <h2>work & finance</h2>
               <ul>
-                <li><a href="#">Your Job Here</a></li>
+                <li><a href="#">Your Workplace</a></li>
                 <li><a href="http://www.progressive.com">Progressive</a></li>
-                <li><a href="#">Your Bank Here</a></li>
+                <li><a href="#">Your Bank</a></li>
                 <li><a href="http://www.verizonwireless.com">Verizon Wireless</a></li>
               </ul>
               <h2>school & development</h2>
               <ul>
                 <li><a href="http://panel.dreamhost.com">DreamHost</a></li>
                 <li><a href="http://www.github.com">GitHub</a></li>
-                <li><a href="#">Your College Here</a></li>
+                <li><a href="#">Your College</a></li>
                 <li><a href="http://www.teamtreehouse.com">Treehouse</a></li>
               </ul>
               <h2>entertainment</h2>
               <ul>
-                <li><a href="http://portland.craigslist.com">Craigslist</a></li>
+                <li><a href="http://www.craigslist.com">Craigslist</a></li>
                 <li><a href="http://grooveshark.com">Grooveshark</a></li>
                 <li><a href="http://www.imgur.com">Imgur</a></li>
                 <li><a href="http://www.reddit.com">Reddit</a></li>
@@ -95,10 +94,22 @@ ProcessRSSFeed("http://weather.yahooapis.com/forecastrss?p=97239");
 // note: sloppy str_replaces are sloppy, but they work for now
 //       --will clean up in future
 foreach ($rss_temp['items'] as $item) {
-  $item[description] = substr_replace($item[description], '', 0, 67);
-  $item[description] = str_replace("<br />\n<a href=\"http://us.rd.yahoo.com/dailynews/rss/weather/Portland__OR/*http://weather.yahoo.com/forecast/USOR0275_f.html\">Full Forecast at Yahoo! Weather</a><BR/><BR/>\n(provided by <a href=\"http://www.weather.com\" >The Weather Channel</a>)<br/>\n]]>", "", $item[description]);
-  $item[description] = str_replace("<BR /><b>Forecast:</b><BR />\n", "<br />", $item[description]);
-  $item[description] = str_replace("<b>Current Conditions:</b><br />", "<strong>now</strong>", $item[description]);
+  
+  // remove unnecessary text and images that come before current conditions
+  $startTagPos = strrpos($item[description], "<![CDATA[");
+  $endTagPos = strrpos($item[description], "<b>Current");
+  $tagLength = $endTagPos - $startTagPos;
+  $item[description] = substr_replace($item[description], "", $startTagPos, $tagLength);
+
+  // remove unnecessary text and links that come after the forecast
+  $startTagPos = strrpos($item[description], "\n<br />\n<a href=\"http://us.rd.yahoo.com");
+  $endTagPos = strrpos($item[description], "]]>");
+  $tagLength = $endTagPos - $startTagPos + 3;
+  $item[description] = substr_replace($item[description], "", $startTagPos, $tagLength);
+
+  // give it the style we want
+  $item[description] = str_replace("<BR />\n<BR /><b>Forecast:</b><BR />\n", "<br />\n<br />\n", $item[description]);
+  $item[description] = str_replace("<b>Current Conditions:</b><br />\n", "                <strong>now</strong> ", $item[description]);
   $item[description] = str_replace("Mon -", "<strong>mon</strong>", $item[description]);
   $item[description] = str_replace("Tue -", "<strong>tue</strong>", $item[description]);
   $item[description] = str_replace("Wed -", "<strong>wed</strong>", $item[description]);
@@ -109,7 +120,10 @@ foreach ($rss_temp['items'] as $item) {
   $item[description] = str_replace("High:", "<br /><em>High:</em>", $item[description]);
   $item[description] = str_replace("Low:", "<em>Low:</em>", $item[description]);
   $item[description] = str_replace(".", "", $item[description]);
-  echo "$item[description]";
+  $item[description] = str_replace("\n", "\n                ", $item[description]); // this is just me being compulsive about proper source indentation
+  
+  // boom
+  echo "$item[description]\n";
 }
 ?>
               </div>
@@ -143,12 +157,21 @@ foreach ($rss_shows as $url) {
 // perform (sloppy) formatting manipulation on merged array
 // and then add entries into a new, cleaner array
 foreach ($rss_shows_merged['items'] as $item) {
+  
+  // remove the show date at end of title, since we will later print it separately
+  $startTagPos = strrpos($item[title], " (");
+  $endTagPos = strrpos($item[title], ")");
+  $tagLength = $endTagPos - $startTagPos + 1;
+  $item[title] = substr_replace($item[title], "", $startTagPos, $tagLength);
+  
+  // stylize the venue names themselves, and shorten specific ones if we wish
   $item[title] = str_replace("Doug Fir Lounge", "<em>Doug Fir Lounge</em>", $item[title]);
   $item[title] = str_replace("Mississippi Studios", "<em>Mississippi Studios</em>", $item[title]);
   $item[title] = str_replace("Wonder Ballroom", "<em>Wonder Ballroom</em>", $item[title]);
   $item[title] = str_replace("Hawthorne Theatre", "<em>Hawthorne Theatre</em>", $item[title]);
   $item[title] = str_replace("McMenamin's Crystal Ballroom", "<em>Crystal Ballroom</em>", $item[title]);
-  $item[title] = str_replace(substr(strrchr($item[title], "("), 0), "", $item[title]);
+  
+  // add to dat new array
   $rss_shows_sorted[$item[pubDate]] = "<a href=\"$item[link]\">$item[title]</a>";
 }
 
@@ -157,8 +180,8 @@ ksort($rss_shows_sorted);
 
 // format timestamps to a readable (lowercase) format then print shows
 foreach ($rss_shows_sorted as $key => $item) {
-  $shortdate= strtolower(gmdate("M d", $key));
-   echo "               <li><strong>$shortdate</strong>$item</li>\n";
+  $shortdate = strtolower(gmdate("M d", $key));
+  echo "                <li><strong>$shortdate</strong>$item</li>\n";
 }
 ?>
               </ul>
@@ -168,7 +191,7 @@ foreach ($rss_shows_sorted as $key => $item) {
         <div class="row-3">
 <?php
 // if scratchpad form submitted, write textarea contents to file
-if($_POST['scratchpad']){
+if(array_key_exists('scratchpad', $_POST)) {
   $file_open = fopen("scratchpad","w+");
   fwrite($file_open, $_POST['scratchpad']);
   fclose($file_open);
