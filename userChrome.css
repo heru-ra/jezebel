@@ -1,0 +1,109 @@
+#page-proxy-favicon, #identity-box, #notification-popup-box, #window-controls, #appmenu-toolbar-button {
+    display: none !important;
+}
+
+#browser-bottombox, #status-bar, #status-bar > *, #ybToolbar {
+	background: transparent !important;
+}
+
+box.scrollbox-innerbox {
+    background-color: #191919 !important;
+}
+
+.tab-icon-image {
+    display: none !important;
+}
+
+.tab-throbber {
+    height: 8px !important;
+    width: 8px !important;
+}
+
+.tabbrowser-tab {
+    -moz-appearance: none !important;
+    border: 0px !important;
+    border-radius:0px !important;
+    padding: 0px 2px 0px 4px !important;
+    font: 7pt "Audimat Mono";
+    height: 12px !important;
+    min-height: 12px !important;
+}
+
+.tabbrowser-tab:not([selected="true"]) {
+    background: transparent !important;
+    background-color: #191919 !important;
+}
+
+.tabbrowser-tab[selected="true"] {
+	background: transparent !important;
+	background-color: #2C2C2C !important;
+	color: #FFA203 !important;
+}
+
+#nav-bar {
+	margin: 0px 0px 0px 0px !important;
+	height: 14px !important;
+	min-height: 14px !important;
+	padding: 0px !important;
+	background: transparent !important;
+    background-color: #191919 !important;
+	border: none !important;
+}
+
+textbox#urlbar, #searchbar > *, #search-box {
+	border: none !important;
+    border-radius:0px !important;
+	height: 14px !important;
+	margin: 0px !important;
+}
+
+.urlbar-textbox-container {
+    border: 0px !important;
+    margin: -1px;
+    padding-left:2px;
+    background: transparent !important;
+    background-color: #2C2C2C!important;
+}
+
+#urlbar .autocomplete-history-dropmarker, #urlbar-icons {
+    display: none !important;
+}
+
+.statuspanel-label {
+    font: 7pt "Audimat Mono";
+    color: #BDBDBD !important;
+    background: transparent !important;
+    background-color: #191919 !important;
+    border: 0px !important;
+}
+
+
+/* floating and auto-hidden fullscreen navbar */
+
+#navigator-toolbox[inFullscreen="true"] {
+    transition: opacity .25s;opacity:.92;margin:0 0 -27px!important; height:27px!important;-moz-transform:translate(0)!important;
+}
+    
+#main-window[inFullscreen="true"] #navigator-toolbox #TabsToolbar, #main-window[inFullscreen="true"] #navigator-toolbox[tabsontop="false"] > #nav-bar {
+    background-color:WindowFrame!important;
+}
+
+#main-window[inFullscreen="true"]:hover #nav-bar:-moz-lwtheme {
+    background-color:-moz-dialog!important;
+}
+
+#main-window[inFullscreen="true"] #fullscr-toggler[collapsed="true"] {
+    visibility:hidden!important;
+}
+
+#navigator-toolbox[style*="margin"][inFullscreen="true"] {
+    -moz-transition: -moz-transform .45s .1s ease-out, opacity .45s .1s ease-out;-moz-transform:translateY(-100%)!important;
+}
+
+#fullscr-toggler {
+    -moz-transform:translate(0)!important;
+}
+
+#navigator-toolbox[inFullscreen="true"]:hover {
+    opacity:1;-moz-transform:translate(0)!important;
+}
