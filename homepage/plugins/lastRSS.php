@@ -10,6 +10,18 @@
  Latest version, features, manual and examples:
  	http://lastrss.webdot.cz/
 
+
+ --- MODIFIED ON 5/7/14 BY heru-ra ------------------------------------
+
+ Added a few new tags to the private variables.
+ 
+ Added a new parsing routine for <feed> tagged items,
+ which uses the $channeltags private variables.
+ 
+ Implemented a simple cURL routine, so that user/password
+ information can be passed for RSS URLs that may
+ need them.
+
  ----------------------------------------------------------------------
  LICENSE
 
@@ -45,7 +57,7 @@ class lastRSS {
 	// -------------------------------------------------------------------
 	// Private variables
 	// -------------------------------------------------------------------
-	var $channeltags = array ('title', 'link', 'description', 'language', 'copyright', 'managingEditor', 'webMaster', 'lastBuildDate', 'rating', 'docs');
+	var $channeltags = array ('title', 'link', 'description', 'language', 'copyright', 'managingEditor', 'webMaster', 'lastBuildDate', 'rating', 'docs', 'fullcount');
 	var $itemtags = array('title', 'link', 'description', 'author', 'category', 'comments', 'enclosure', 'guid', 'pubDate', 'source');
 	var $imagetags = array('title', 'url', 'link', 'width', 'height');
 	var $textinputtags = array('title', 'description', 'name', 'link');
@@ -53,7 +65,7 @@ class lastRSS {
 	// -------------------------------------------------------------------
 	// Parse RSS file and returns associative array.
 	// -------------------------------------------------------------------
-	function Get ($rss_url) {
+	function Get ($rss_url, $rss_user, $rss_pass) {
 		// If CACHE ENABLED
 		if ($this->cache_dir != '') {
 			$cache_file = $this->cache_dir . '/rsscache_' . md5($rss_url);
@@ -65,7 +77,7 @@ class lastRSS {
 				if ($result) $result['cached'] = 1;
 			} else {
 				// cached file is too old, create new
-				$result = $this->Parse($rss_url);
+				$result = $this->Parse($rss_url, $rss_user, $rss_pass);
 				$serialized = serialize($result);
 				if ($f = @fopen($cache_file, 'w')) {
 					fwrite ($f, $serialized, strlen($serialized));
@@ -76,7 +88,7 @@ class lastRSS {
 		}
 		// If CACHE DISABLED >> load and parse the file directly
 		else {
-			$result = $this->Parse($rss_url);
+			$result = $this->Parse($rss_url, $rss_user, $rss_pass);
 			if ($result) $result['cached'] = 0;
 		}
 		// return result
@@ -130,14 +142,22 @@ class lastRSS {
 	// Parse() is private method used by Get() to load and parse RSS file.
 	// Don't use Parse() in your scripts - use Get($rss_file) instead.
 	// -------------------------------------------------------------------
-	function Parse ($rss_url) {
+	function Parse ($rss_url, $rss_user, $rss_pass) {
+	 
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $rss_url);
+		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($curl, CURLOPT_USERPWD, $rss_user . ":" . $rss_pass);
+		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+		curl_setopt($curl, CURLOPT_ENCODING, "");
+		$curlData = curl_exec($curl);
+		curl_close($curl);		
+		
 		// Open and load RSS file
-		if ($f = @fopen($rss_url, 'r')) {
-			$rss_content = '';
-			while (!feof($f)) {
-				$rss_content .= fgets($f, 4096);
-			}
-			fclose($f);
+		if ($f = $curlData) {
+			$rss_content = $f;
 
 			// Parse document encoding
 			$result['encoding'] = $this->my_preg_match("'encoding=[\'\"](.*?)[\'\"]'si", $rss_content);
@@ -147,6 +167,14 @@ class lastRSS {
 			// otherwise use the default codepage
 			else
 				{ $this->rsscp = $this->default_cp; } // This is used in my_preg_match()
+
+			// Parse FEED info
+			preg_match("'<feed.*?>(.*?)</feed>'si", $rss_content, $out_channel);
+			foreach($this->channeltags as $channeltag)
+			{
+				$temp = $this->my_preg_match("'<$channeltag.*?>(.*?)</$channeltag>'si", $out_channel[1]);
+				if ($temp != '') $result[$channeltag] = $temp; // Set only if not empty
+			}
 
 			// Parse CHANNEL info
 			preg_match("'<channel.*?>(.*?)</channel>'si", $rss_content, $out_channel);

@@ -1,53 +1,91 @@
 * { line-height: 12px }
 
-body { background: #212121; color: #BDBDBD; font: 7pt "Verdana"; margin: 0; padding: 23px 0 23px 0 }
-
+body { background: #212121; color: #BDBDBD; font: 7pt "Verdana"; margin: 0; padding: 18px 0 18px 0 }
 div.wrapper { width: 100%; text-align: center }
-div.grid { display: inline-block; width: 568px; margin-right: 28px }
+div.grid { display: inline-block; text-align: left; width: 560px; margin: 0 24px 0 24px }
 
-div.row-1, div.row-3, div.col-1, div.col-2 { margin-left: 28px; text-align: left }
-div.row-3, div.row-2 { margin-top: 12px }
-div.col-1, div.col-2 { float: left }
-div.row-1 { width: 540px }
+div.row-2, div.row-3 { margin-top: 12px }
+div.col-1, div.col-2 { display: table-cell }
 
+/*  use this to change the height of row 2 and it's 2 info column children  *
+ *  note: if you do change the height, you will have to also tweak the      *
+ *  top position of div.tabs-feed on line 23                                */
+div.row-2 { height: 410px }
 
-/*  Use this to change the height of row 2 and it's 2 info column children.
- *  -- The row and columns don't auto adjust in height because of
- *  how I had to float the columns left, and because the shows feed div
- *  needs to be forced to overflow scroll. There's probably a cleaner way
- *  to handle this, but this works for now.  */
-div.row-2 { height:396px }
+div.col-1 { width: 160px }
+div.col-2 { width: 400px; height: inherit }
+div.row-3 iframe { width: 100%; margin-top: 2px }
 
+div.feed-shows, div.feed-reddit { height: inherit; overflow: auto; overflow-x: hidden }
+div.label-v { height: 0px; text-align: right; position: relative; transform: rotate(-90deg); -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg) }
+div.col-1 div.label-v { top: 80px; left: -108px }
+div.col-2 div.label-v { top: 200px; left: -228px }
+div.tabs-feed { height: 0px; position: relative; top: -212px; left: 214px; transform: rotate(90deg); -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg) }
 
-div.col-1 { width: 140px }
-div.col-2 { width: 372px; height: inherit }
-div.row-3 { width: 538px }
+div.feed-shows, div.feed-reddit, input, textarea { border: 1px solid #191919; background: #2C2C2C }
+div.row-1 input { width: 473px }
+div.row-1 select { float: right; width: 80px }
 
-div.links { padding: 3px 0 7px 0 }
-div.show_feed { height: inherit; padding-left: 2px; overflow: auto; overflow-x: hidden }
-div.vertlabel { height: 0px; width: 200px; text-align: right; position: relative; top: 85px; left: -115px }
-div.row-3 div.horizlabel { float: left }
+div.iframe-wrapper { padding-right: 2px }
+div.iframe-wrapper div.label-h { float: left }
+div.iframe-wrapper textarea { font: 8pt "Verdana"; width: 100%; resize: none }
+div.iframe-wrapper button { float: right; margin-top: 6px; }
 
-div.show_feed, input, textarea { border: 1px solid #191919; background: #2C2C2C }
-div.row-1 input { width: 453px }
-div.row-1 select { width: 82px }
-div.row-3 textarea { font: 8pt "Verdana"; width: 100%; resize: vertical }
-div.row-3 button { float: right; margin-top: 8px; margin-right: -2px }
+.table-row { display: table-row }
+.table-cell { display: table-cell }
+.block, div.list-links li a { display: block }
+h3, div.tabs-feed li { display: inline-block }
+span.reddit-comment a { display: inline }
 
-h1 { margin: 0; color: #FFF; font: 20pt "Audimat Mono"; font-weight: bold }
-div.vertlabel h1 { transform: rotate(-90deg); -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg) }
-h2, strong { color: #FFA203; font: 7pt "Audimat Mono"; font-weight: normal; margin: 0 }
+div.feed-reddit p { margin-bottom: 0 }
+div.feed-reddit p:first-child { margin-top: 0 }
 
-div.show_feed strong { display: table-cell; width: 32px }
-div.col-1 strong { float: left; padding: 1px 4px 0 0; margin-top: 1px }
-em { font-style: normal; color: #FFF }
+div.feed-shows div.table-cell, div.feed-reddit div.table-cell { width: 30px; padding: 0 4px 0 4px }
 
-ul { list-style-type: none; padding: 0; margin: 0 }
-div.links ul { padding: 2px 6px 5px 17px }
+h1, h2, h3, ul, strong, div.feed-reddit blockquote { margin: 0 }
+span.reddit-post { vertical-align: top }
+div.feed-weather div.table-cell, span.reddit-comment blockquote { padding: 0 0 0 4px }
+h3, span.reddit-comment, span.reddit-post { padding: 6px 4px 6px 4px }
+span.reddit-comment blockquote { border-left: 2px solid #B5BAE1 }
+h1 { font: 20pt "Audimat Mono" }
+h3 { font: 14pt "Audimat Mono" }
+span.reddit-karma, span.reddit-title, div.tabs-feed li, h2, strong, span.reddit-comment code { font: 7pt "Audimat Mono" }
+h1, em, span.reddit-comment { color: #FFF }
+h2, h3, strong, span.reddit-title { color: #FFA203 }
+span.error { color: #FF0000 }
+span.reddit-downvote { color: #4551AE }
+em { font-style: normal }
+h2, strong { font-weight: normal }
+h1, h3, span.error, span.reddit-title { font-weight: bold }
 
-div.show_feed li { display: table-row }
+ul { list-style-type: none; padding: 0 }
+span.reddit-comment ul { list-style-type: disc; padding: 6px 0 6px 0; margin-left: 24px }
+div.list-links ul { padding: 0px 6px 6px 17px; width: 113px }
+div.list-links { padding-bottom: 6px }
 
-li a { color: #BDBDBD; text-decoration: none; padding: 0 2px 0 2px }
-div.links li a { display: block }
-div.show_feed li a { display: table-cell }
-li a:hover, li a:hover > em { color: #FFA203; background: #3C3C3C }
+div.feed-shows li:nth-child(even), a.reddit-title-link { background: #292929 }
+div.tabs-feed li { background: #191919; padding: 0px 4px 0px 4px; margin-right: 1px; border: 1px solid #191919; -webkit-border-radius: 2px 2px 0 0; -moz-border-radius: 2px 2px 0 0; border-radius: 2px 2px 0 0; height: 12px }
+div.tabs-feed li.tabs-selected, li.tabs-selected > a { color: #FFA203; background: #2C2C2C; padding-top: 1px }
+div.tabs-feed li.tabs-unselected, li.tabs-unselected > a { color: #BDBDBD; background: #1D1D1D }
+
+a { text-decoration: none; padding: 0 2px 0 2px; color: #BDBDBD }
+a.reddit-title-link { padding: 0 4px 0 4px }
+span.reddit-comment a, span.reddit-post a, span.reddit-icon img { -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px }
+span.reddit-comment a, span.reddit-post a { background: #212121 }
+a:hover, a:hover > em, a:hover > span { color: #FFA203; background: #3C3C3C !important }
+span.reddit-icon img { margin: 6px 0 0 0; border: 1px solid #212121; background: #BDBDBD; -webkit-background-clip: padding-box; -moz-background-clip: padding; background-clip: padding-box }
+span.reddit-icon img.post-link { margin-bottom: 6px }
+span.reddit-icon a:hover img { border: 1px solid #3C3C3C }
+span.reddit-icon a:hover, div.tabs-feed a { background: transparent !important }
+
+/* chromium and webkit hacks */
+div.iframe-wrapper-chrome-hack { padding-right: 6px }
+select.iframe-wrapper-chrome-hack { border: 1px solid #191919; -webkit-border-radius: 2px; border-radius: 2px; background: #212121 }
+select.iframe-wrapper-chrome-hack:hover { border: 1px solid #2C2C2C; background: #3C3C3C }
+div.iframe-wrapper-chrome-hack button { border: 1px solid #191919; -webkit-border-radius: 3px; border-radius: 3px; background: #212121; margin-top: 4px; margin-right: -4px }
+div.iframe-wrapper-chrome-hack button:hover { border: 1px solid #2C2C2C; background: #3C3C3C }
+::-webkit-scrollbar { width: 13px; height: 13px }
+::-webkit-scrollbar-track-piece { border-top: 1px solid #191919; border-right: 1px solid #1C1C1C; border-bottom: 2px solid #1C1C1C; border-left: 1px solid #191919; background: #202020 }
+::-webkit-scrollbar-thumb { background: #60491F; border: 2px solid #1D1D1D }
+::-webkit-scrollbar-thumb:hover { background: #6E5120 }
+::-webkit-scrollbar-corner { background: #202020 }

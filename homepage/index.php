@@ -1,3 +1,47 @@
+<?php
+include "./plugins/functions.php";
+
+// if you feel uncomfortable leaving your email/password plain-text
+// in a file like this, feel free to leave these fields blank
+// -- the inbox counter will not display, but it won't break any
+// other functions
+$gmailAddress = "address@domain.com";
+$gmailPassword = "";
+
+// your individual reddit feed key can be found by navigating to
+// https://ssl.reddit.com/prefs/feeds/
+// -- under the "private listings" section, open the "your front page"
+// JSON link, then copy/paste the alphanumeric key in the "feed" field
+// of the URL
+$redditFeedKey = "";
+$redditUsername = "BusterSkeetin";
+// number of reddit comments in history to show in feed
+// -- the higher you go, the more noticible the lag in load time
+// ** max is 100 **
+$redditFeedLimit = 25;
+
+// you can find the WOEID number for your local city by navigating to
+// http://weather.yahoo.com
+// -- search for your city, then copy/paste the numerical code that
+// is located at the end of the URL
+$weatherWOEID = "2475687";
+// accepts either "f" or "c" (Farenheit or Celcius)
+$weatherTempUnit = "f";
+
+// venues to use in shows feed -- visit
+// http://acousti.co/songkick
+// for more info on how to use Songkick in conjunction with
+// the acousti.co RSS feed service, and finding venue ids
+$showsFeedVenues = array(
+  'http://acousti.co/feeds/venue_id/11585-doug-fir-lounge',
+  'http://acousti.co/feeds/venue_id/11593-hawthorne-theatre',
+  'http://acousti.co/feeds/venue_id/1433-wonder-ballroom',
+  'http://acousti.co/feeds/venue_id/5776-mississippi-studios',
+  'http://acousti.co/feeds/venue_id/1228-mcmenamins-crystal-ballroom',
+  'http://acousti.co/feeds/venue_id/32177-roseland-theater',
+  'http://acousti.co/feeds/venue_id/604921-branx'
+);
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -6,21 +50,14 @@
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <script type="text/javascript">
-      function combine_action(form) {
-        // combine option and input values to create the form action
-        form.action = document.getElementById('stype').value+document.getElementById('sinput').value;
-        
-        // if Google option is selected, we must use GET method instead of POST
-        if (document.getElementById('stype').value === 'https://encrypted.google.com/#q=') form.method="GET";
-      }
-    </script>
+    <script src="/js/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/js/scripts.js"></script>
   </head>
   <body>
     <div class="wrapper">
       <div class="grid">
         <div class="row-1">
-          <div class="horizlabel">
+          <div class="label-h">
             <h1>search</h1>
           </div>
           <form method="POST" id="search" onsubmit="combine_action(this);">
@@ -34,13 +71,14 @@
         </div>
         <div class="row-2">
           <div class="col-1">
-            <div class="vertlabel">
+            <div class="label-v">
               <h1>links</h1>
             </div>
-            <div class="links">
+            <div class="list-links">
               <h2>communication</h2>
               <ul>
-                <li><a href="http://mail.google.com">Gmail</a></li>
+                <li><a href="https://mail.google.com/mail/u/0/?pli=1#inbox">Gmail<?php echo gmailUnreadCount($gmailAddress, $gmailPassword); ?></a></li>
+                <li><a href="https://app.mysms.com">MySMS</a></li>
               </ul>
               <h2>work & finance</h2>
               <ul>
@@ -52,164 +90,51 @@
               <h2>school & development</h2>
               <ul>
                 <li><a href="http://panel.dreamhost.com">DreamHost</a></li>
-                <li><a href="http://www.github.com">GitHub</a></li>
-                <li><a href="#">Your College</a></li>
+                <li><a href="https://courses.edx.org/dashboard">EdX</a></li>
+                <li><a href="https://github.com/heru-ra">GitHub</a></li>
+                <li><a href="http://my.pcc.edu">PCC</a></li>
                 <li><a href="http://www.teamtreehouse.com">Treehouse</a></li>
               </ul>
               <h2>entertainment</h2>
               <ul>
-                <li><a href="http://www.craigslist.com">Craigslist</a></li>
+                <li><a href="http://portland.craigslist.com">Craigslist</a></li>
                 <li><a href="http://grooveshark.com">Grooveshark</a></li>
                 <li><a href="http://www.imgur.com">Imgur</a></li>
-                <li><a href="http://www.reddit.com">Reddit</a></li>
-                <li><a href="http://www.youtube.com">YouTube</a></li>
+                <li><a href="http://www.reddit.com">Reddit<?php echo redditUnreadCount($redditFeedKey, $redditUsername); ?></a></li>                
+                <li><a href="https://www.youtube.com">YouTube</a></li>
               </ul>
             </div>
             <div class="col-1-row-2">
-              <div class="vertlabel">
+              <div class="label-v">
                 <h1>weather</h1>
               </div>
-              <div class="weather">
-<?php
-function ProcessRSSFeed($url) {
-  global $rss;
-  global $rss_temp;
-  $rss_temp = $rss->get($url);
-}
-
-// include lastRSS plugin
-include "./plugins/lastRSS.php";
-
-// create lastRSS object
-$rss = new lastRSS;
-
-// set cache dir and time limit
-$rss->cache_dir = './cache';
-$rss->cache_time = 4800;
-
-// process weather RSS feed (Portland, OR 97239)
-ProcessRSSFeed("http://weather.yahooapis.com/forecastrss?p=97239");
-
-// perform formatting manipulation, then print data
-// note: sloppy str_replaces are sloppy, but they work for now
-//       --will clean up in future
-foreach ($rss_temp['items'] as $item) {
-  
-  // remove unnecessary text and images that come before current conditions
-  $startTagPos = strrpos($item[description], "<![CDATA[");
-  $endTagPos = strrpos($item[description], "<b>Current");
-  $tagLength = $endTagPos - $startTagPos;
-  $item[description] = substr_replace($item[description], "", $startTagPos, $tagLength);
-
-  // remove unnecessary text and links that come after the forecast
-  $startTagPos = strrpos($item[description], "\n<br />\n<a href=\"http://us.rd.yahoo.com");
-  $endTagPos = strrpos($item[description], "]]>");
-  $tagLength = $endTagPos - $startTagPos + 3;
-  $item[description] = substr_replace($item[description], "", $startTagPos, $tagLength);
-
-  // give it the style we want
-  $item[description] = str_replace("<BR />\n<BR /><b>Forecast:</b><BR />\n", "<br />\n<br />\n", $item[description]);
-  $item[description] = str_replace("<b>Current Conditions:</b><br />\n", "                <strong>now</strong> ", $item[description]);
-  $item[description] = str_replace("Mon -", "<strong>mon</strong>", $item[description]);
-  $item[description] = str_replace("Tue -", "<strong>tue</strong>", $item[description]);
-  $item[description] = str_replace("Wed -", "<strong>wed</strong>", $item[description]);
-  $item[description] = str_replace("Thu -", "<strong>thu</strong>", $item[description]);
-  $item[description] = str_replace("Fri -", "<strong>fri</strong>", $item[description]);
-  $item[description] = str_replace("Sat -", "<strong>sat</strong>", $item[description]);
-  $item[description] = str_replace("Sun -", "<strong>sun</strong>", $item[description]);
-  $item[description] = str_replace("High:", "<br /><em>High:</em>", $item[description]);
-  $item[description] = str_replace("Low:", "<em>Low:</em>", $item[description]);
-  $item[description] = str_replace(".", "", $item[description]);
-  $item[description] = str_replace("\n", "\n                ", $item[description]); // this is just me being compulsive about proper source indentation
-  
-  // boom
-  echo "$item[description]\n";
-}
-?>
+              <div class="feed-weather">
+<?php echo weatherForecast($weatherWOEID, $weatherTempUnit); ?>
               </div>
             </div>        
           </div>
           <div class="col-2">
-            <div class="vertlabel">
-              <h1>shows</h1>
+            <div class="label-v">
+              <h1 id="id-label-shows">shows</h1>
+              <h1 id="id-label-reddit" style="display: none">reddit</h1>
             </div>
-            <div class="show_feed">
+            <div id="id-feed-shows" class="feed-shows">
               <ul>
-<?php
-// venue RSS feeds
-$rss_shows = array(
-  'http://acousti.co/feeds/venue_id/11585-doug-fir-lounge',
-  'http://acousti.co/feeds/venue_id/11593-hawthorne-theatre',
-  'http://acousti.co/feeds/venue_id/1433-wonder-ballroom',
-  'http://acousti.co/feeds/venue_id/5776-mississippi-studios',
-  'http://acousti.co/feeds/venue_id/1228-mcmenamins-crystal-ballroom'
-);
-
-$rss_shows_merged = array();
-$rss_shows_sorted = array();
-
-// process each venue feed and merge into one array
-foreach ($rss_shows as $url) {
-  ProcessRSSFeed($url);
-  $rss_shows_merged = array_merge_recursive($rss_shows_merged, $rss_temp);
-}
-
-// perform (sloppy) formatting manipulation on merged array
-// and then add entries into a new, cleaner array
-foreach ($rss_shows_merged['items'] as $item) {
-  
-  // remove the show date at end of title, since we will later print it separately
-  $startTagPos = strrpos($item[title], " (");
-  $endTagPos = strrpos($item[title], ")");
-  $tagLength = $endTagPos - $startTagPos + 1;
-  $item[title] = substr_replace($item[title], "", $startTagPos, $tagLength);
-  
-  // stylize the venue names themselves, and shorten specific ones if we wish
-  $item[title] = str_replace("Doug Fir Lounge", "<em>Doug Fir Lounge</em>", $item[title]);
-  $item[title] = str_replace("Mississippi Studios", "<em>Mississippi Studios</em>", $item[title]);
-  $item[title] = str_replace("Wonder Ballroom", "<em>Wonder Ballroom</em>", $item[title]);
-  $item[title] = str_replace("Hawthorne Theatre", "<em>Hawthorne Theatre</em>", $item[title]);
-  $item[title] = str_replace("McMenamin's Crystal Ballroom", "<em>Crystal Ballroom</em>", $item[title]);
-  
-  // add to dat new array
-  $rss_shows_sorted[$item[pubDate]] = "<a href=\"$item[link]\">$item[title]</a>";
-}
-
-// sort new array, via leading timestamp keys
-ksort($rss_shows_sorted);
-
-// format timestamps to a readable (lowercase) format then print shows
-foreach ($rss_shows_sorted as $key => $item) {
-  $shortdate = strtolower(gmdate("M d", $key));
-  echo "                <li><strong>$shortdate</strong>$item</li>\n";
-}
-?>
+<?php echo feedShows($showsFeedVenues); ?>
+              </ul>
+            </div>
+            <div id="id-feed-reddit" class="feed-reddit" style="display: none">
+<?php echo feedReddit($redditFeedKey, $redditUsername, $redditFeedLimit); ?>
+            </div>
+            <div class="tabs-feed">
+              <ul>
+                <li id="id-tabs-feed-1" class="tabs-selected"><a href="#">shows</a></li><li id="id-tabs-feed-2" class="tabs-unselected"><a href="#">reddit</a></li>
               </ul>
             </div>
           </div>
         </div>
         <div class="row-3">
-<?php
-// if scratchpad form submitted, write textarea contents to file
-if(array_key_exists('scratchpad', $_POST)) {
-  $file_open = fopen("scratchpad","w+");
-  fwrite($file_open, $_POST['scratchpad']);
-  fclose($file_open);
-}
-?>
-          <form action="<?=$PHP_SELF?>" method="POST">
-            <textarea name="scratchpad" rows=5 class="scratchpad"><?php
-// open scratchpad file and print contents in textarea
-$textfile = file ("scratchpad");
-foreach ($textfile as $line) {
-  echo $line;
-}
-?></textarea>    
-            <div class="horizlabel">
-              <h1>scratchpad</h1>
-            </div>
-            <button type="submit">Save</button>
-          </form>
+          <iframe src="scratchpad.php" frameborder="0" scrolling="no" seamless></iframe>
         </div>
       </div>
     </div>
