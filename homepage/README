@@ -6,6 +6,9 @@ A COUPLE THINGS TO NOTE:
 Both the "cache" folder and the "scratchpad" file must be given
 CHMOD 777 permissions, so they can be written to properly.
 
+My source uses curl and json routines, so make sure you have the
+according php5 packages installed
+
 There are configuration variables that need to be set within
 the ./index.php source. They are at the very top, and are commented
 for your understanding and convenience.
