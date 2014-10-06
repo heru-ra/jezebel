@@ -1,3 +1,20 @@
+10/06/2014
+
+
+UPDATES:
+
++ Added calendar feed, that makes use of Google Calendar
++ Fixed Reddit karma score handling
++ Fixed a few Reddit thumbnail and link-handling bugs
++ Added Reddit controversy dagger and gilding display
++ Tweaked Reddit feed style and layout
++ Tweaked shows feed, so mouse-over show date displays more detail
++ Added cookie support, to remember and recall last feed/tab visited
++ Expanded color pallette of some feeds, to reflect system colors
++ Cleaned up some code
+
+
+
 05/12/2014
 
 

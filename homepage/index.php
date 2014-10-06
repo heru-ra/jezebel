@@ -1,18 +1,21 @@
 <?php
 include "./plugins/functions.php";
 
-// if you feel uncomfortable leaving your email/password plain-text
-// in a file like this, feel free to leave these fields blank
+// if you feel uncomfortable leaving your gmail password plain-text
+// in a file like this, feel free to leave the field blank
 // -- the inbox counter will not display, but it won't break any
-// other functions
+// other functions. however if you leave the address field blank,
+// the calendar won't show
+// -- note you must also be logged into google/gmail in your
+// general browser for calendar to show, as it relies on those
+// cookies
 $gmailAddress = "address@domain.com";
 $gmailPassword = "";
 
 // your individual reddit feed key can be found by navigating to
 // https://ssl.reddit.com/prefs/feeds/
 // -- under the "private listings" section, open the "your front page"
-// JSON link, then copy/paste the alphanumeric key in the "feed" field
-// of the URL
+// JSON link, then copy/paste the key in the "feed" field of the URL
 $redditFeedKey = "";
 $redditUsername = "BusterSkeetin";
 // number of reddit comments in history to show in feed
@@ -93,11 +96,11 @@ $showsFeedVenues = array(
                 <li><a href="https://courses.edx.org/dashboard">EdX</a></li>
                 <li><a href="https://github.com/heru-ra">GitHub</a></li>
                 <li><a href="http://my.pcc.edu">PCC</a></li>
-                <li><a href="http://www.teamtreehouse.com">Treehouse</a></li>
               </ul>
               <h2>entertainment</h2>
               <ul>
                 <li><a href="http://portland.craigslist.com">Craigslist</a></li>
+                <li><a href="http://www.facebook.com">Facebook</a></li>
                 <li><a href="http://grooveshark.com">Grooveshark</a></li>
                 <li><a href="http://www.imgur.com">Imgur</a></li>
                 <li><a href="http://www.reddit.com">Reddit<?php echo redditUnreadCount($redditFeedKey, $redditUsername); ?></a></li>                
@@ -115,20 +118,72 @@ $showsFeedVenues = array(
           </div>
           <div class="col-2">
             <div class="label-v">
-              <h1 id="id-label-shows">shows</h1>
-              <h1 id="id-label-reddit" style="display: none">reddit</h1>
+<?php
+  // valid tab names, for cross reference
+  $tabs = array("calendar", "shows", "reddit");
+  
+  // display the last visited tab label
+  // -- if no or an invalid cookie value is found, default to the
+  // calendar tab label
+  if($_COOKIE["last_tab"] == "calendar" || $_COOKIE["last_tab"] == false || $_COOKIE["last_tab"] != in_array($_COOKIE["last_tab"], $tabs) ) {
+    echo "              <h1 id=\"id-label-calendar\">calendar</h1><h1 id=\"id-label-shows\" style=\"display: none\">shows</h1><h1 id=\"id-label-reddit\" style=\"display: none\">reddit</h1>";
+  }
+  if($_COOKIE["last_tab"] == "shows") {
+    echo "              <h1 id=\"id-label-calendar\" style=\"display: none\">calendar</h1><h1 id=\"id-label-shows\">shows</h1><h1 id=\"id-label-reddit\" style=\"display: none\">reddit</h1>";
+  }
+  if($_COOKIE["last_tab"] == "reddit") {
+    echo "              <h1 id=\"id-label-calendar\" style=\"display: none\">calendar</h1><h1 id=\"id-label-shows\" style=\"display: none\">shows</h1><h1 id=\"id-label-reddit\">reddit</h1>";
+  }
+?>
             </div>
-            <div id="id-feed-shows" class="feed-shows">
-              <ul>
-<?php echo feedShows($showsFeedVenues); ?>
-              </ul>
+<?php
+  // if calendar was last visited tab, or cookie value not found or
+  // invalid, display feed
+  if($_COOKIE["last_tab"] == "calendar" || $_COOKIE["last_tab"] == false || $_COOKIE["last_tab"] != in_array($_COOKIE["last_tab"], $tabs) ) {
+    echo "            <div id=\"id-feed-calendar\" class=\"feed-calendar\">";
+  } else {
+    echo "            <div id=\"id-feed-calendar\" class=\"feed-calendar\"  style=\"display: none\">";
+  }
+?>
+              <div class="feed-calendar-error"><span class="error">Could not load calendar:</span><br />Please check your internet connection and/or make sure you are logged into Google services.</div>
+              <iframe src="https://www.google.com/calendar/embed?showSubscribeButton=0&showTitle=0&showPrint=0&showTabs=0&showTz=0&wkst=1&bgcolor=%232c2c2c&src=<?php echo "$gmailAddress"?>&color=%23FF0000" width="100%" height="100%" frameborder="0" scrolling="no" seamless></iframe>
             </div>
-            <div id="id-feed-reddit" class="feed-reddit" style="display: none">
-<?php echo feedReddit($redditFeedKey, $redditUsername, $redditFeedLimit); ?>
+<?php
+  // if shows was last visited tab, display feed
+  if($_COOKIE["last_tab"] == "shows") {
+    echo "            <div id=\"id-feed-shows\" class=\"feed-shows\">";
+  } else {
+    echo "            <div id=\"id-feed-shows\" class=\"feed-shows\"  style=\"display: none\">";
+  }
+  
+  echo feedShows($showsFeedVenues);
+?>
+            </div>
+<?php
+  // if reddit was last visited tab, display feed
+  if($_COOKIE["last_tab"] == "reddit") {
+    echo "            <div id=\"id-feed-reddit\" class=\"feed-reddit\">";
+  } else {
+    echo "            <div id=\"id-feed-reddit\" class=\"feed-reddit\"  style=\"display: none\">";
+  }
+  
+  echo feedReddit($redditFeedKey, $redditUsername, $redditFeedLimit);
+?>
             </div>
             <div class="tabs-feed">
               <ul>
-                <li id="id-tabs-feed-1" class="tabs-selected"><a href="#">shows</a></li><li id="id-tabs-feed-2" class="tabs-unselected"><a href="#">reddit</a></li>
+<?php
+  // select the last visited tab, or default to calendar
+  if($_COOKIE["last_tab"] == "calendar" || $_COOKIE["last_tab"] == false || $_COOKIE["last_tab"] != in_array($_COOKIE["last_tab"], $tabs) ) {
+    echo "                <li id=\"id-tabs-feed-calendar\" class=\"tabs-selected\"><a href=\"#\">calendar</a></li><li id=\"id-tabs-feed-shows\" class=\"tabs-unselected\"><a href=\"#\">shows</a></li><li id=\"id-tabs-feed-reddit\" class=\"tabs-unselected\"><a href=\"#\">reddit</a></li>";
+  }
+  if($_COOKIE["last_tab"] == "shows") {
+    echo "                <li id=\"id-tabs-feed-calendar\" class=\"tabs-unselected\"><a href=\"#\">calendar</a></li><li id=\"id-tabs-feed-shows\" class=\"tabs-selected\"><a href=\"#\">shows</a></li><li id=\"id-tabs-feed-reddit\" class=\"tabs-unselected\"><a href=\"#\">reddit</a></li>";
+  }
+  if($_COOKIE["last_tab"] == "reddit") {
+    echo "                <li id=\"id-tabs-feed-calendar\" class=\"tabs-unselected\"><a href=\"#\">calendar</a></li><li id=\"id-tabs-feed-shows\" class=\"tabs-unselected\"><a href=\"#\">shows</a></li><li id=\"id-tabs-feed-reddit\" class=\"tabs-selected\"><a href=\"#\">reddit</a></li>";
+  }
+?>
               </ul>
             </div>
           </div>

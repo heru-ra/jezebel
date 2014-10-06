@@ -9,7 +9,7 @@ div.col-1, div.col-2 { display: table-cell }
 
 /*  use this to change the height of row 2 and it's 2 info column children  *
  *  note: if you do change the height, you will have to also tweak the      *
- *  top position of div.tabs-feed on line 23                                */
+ *  top position of div.tabs-feed on line 26                                */
 div.row-2 { height: 410px }
 
 div.col-1 { width: 160px }
@@ -17,12 +17,15 @@ div.col-2 { width: 400px; height: inherit }
 div.row-3 iframe { width: 100%; margin-top: 2px }
 
 div.feed-shows, div.feed-reddit { height: inherit; overflow: auto; overflow-x: hidden }
+div.feed-calendar { height: inherit }
+div.feed-calendar iframe { height: 100%; z-index: 1; position: relative; top: -36px }
+
 div.label-v { height: 0px; text-align: right; position: relative; transform: rotate(-90deg); -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg) }
 div.col-1 div.label-v { top: 80px; left: -108px }
 div.col-2 div.label-v { top: 200px; left: -228px }
 div.tabs-feed { height: 0px; position: relative; top: -212px; left: 214px; transform: rotate(90deg); -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg) }
 
-div.feed-shows, div.feed-reddit, input, textarea { border: 1px solid #191919; background: #2C2C2C }
+div.feed-calendar, div.feed-shows, div.feed-reddit, input, textarea { border: 1px solid #191919; background: #2C2C2C }
 div.row-1 input { width: 473px }
 div.row-1 select { float: right; width: 80px }
 
@@ -34,7 +37,7 @@ div.iframe-wrapper button { float: right; margin-top: 6px; }
 .table-row { display: table-row }
 .table-cell { display: table-cell }
 .block, div.list-links li a { display: block }
-h3, div.tabs-feed li { display: inline-block }
+h3, div.tabs-feed li, span.reddit-title { display: inline-block }
 span.reddit-comment a { display: inline }
 
 div.feed-reddit p { margin-bottom: 0 }
@@ -46,22 +49,31 @@ h1, h2, h3, ul, strong, div.feed-reddit blockquote { margin: 0 }
 span.reddit-post { vertical-align: top }
 div.feed-weather div.table-cell, span.reddit-comment blockquote { padding: 0 0 0 4px }
 h3, span.reddit-comment, span.reddit-post { padding: 6px 4px 6px 4px }
-span.reddit-comment blockquote { border-left: 2px solid #B5BAE1 }
+span.reddit-comment blockquote { border-left: 2px solid #B5BAE1; margin-left: 4px }
 h1 { font: 20pt "Audimat Mono" }
 h3 { font: 14pt "Audimat Mono" }
-span.reddit-karma, span.reddit-title, div.tabs-feed li, h2, strong, span.reddit-comment code { font: 7pt "Audimat Mono" }
+span.reddit-dagger, span.reddit-goldstar { font: 8pt "Verdana" }
+span.reddit-karma, span.reddit-downvote, span.reddit-zerovote, span.reddit-upvote, span.reddit-gold, span.reddit-title, div.tabs-feed li, h2, strong, span.reddit-comment code { font: 7pt "Audimat Mono" }
+span.reddit-title { white-space: nowrap; overflow: hidden; width: 375px; vertical-align: middle }
 h1, em, span.reddit-comment { color: #FFF }
 h2, h3, strong, span.reddit-title { color: #FFA203 }
-span.error { color: #FF0000 }
+span.error { color: #AE4551 }
 span.reddit-downvote { color: #4551AE }
+span.reddit-zerovote { color: #7C7176 }
+span.reddit-upvote { color: #B4913F }
+span.reddit-dagger { color: #E1B5BA }
+span.reddit-gold { color: #E1DCB5 }
 em { font-style: normal }
 h2, strong { font-weight: normal }
-h1, h3, span.error, span.reddit-title { font-weight: bold }
+h1, h3, span.error { font-weight: bold }
 
 ul { list-style-type: none; padding: 0 }
 span.reddit-comment ul { list-style-type: disc; padding: 6px 0 6px 0; margin-left: 24px }
 div.list-links ul { padding: 0px 6px 6px 17px; width: 113px }
 div.list-links { padding-bottom: 6px }
+
+span.reddit-comment pre:first-child, span.reddit-comment ul:first-child { margin-top: 0; padding-top: 0 }
+span.reddit-comment pre:last-child, span.reddit-comment ul:last-child { margin-bottom: 0; padding-bottom: 0 }
 
 div.feed-shows li:nth-child(even), a.reddit-title-link { background: #292929 }
 div.tabs-feed li { background: #191919; padding: 0px 4px 0px 4px; margin-right: 1px; border: 1px solid #191919; -webkit-border-radius: 2px 2px 0 0; -moz-border-radius: 2px 2px 0 0; border-radius: 2px 2px 0 0; height: 12px }
@@ -77,6 +89,12 @@ span.reddit-icon img { margin: 6px 0 0 0; border: 1px solid #212121; background:
 span.reddit-icon img.post-link { margin-bottom: 6px }
 span.reddit-icon a:hover img { border: 1px solid #3C3C3C }
 span.reddit-icon a:hover, div.tabs-feed a { background: transparent !important }
+
+/* give calendar a chance to load before showing error div */
+div.feed-calendar-error { -webkit-animation: delay 4s; -moz-animation: delay 4s; animation: delay 4s }
+@-webkit-keyframes delay { 0% { opacity: 0; } 99% { opacity: 0; } 100% { opacity: 1; } }
+@-moz-keyframes delay { 0% { opacity: 0; } 99% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes delay { 0% { opacity: 0; } 99% { opacity: 0; } 100% { opacity: 1; } }
 
 /* chromium and webkit hacks */
 div.iframe-wrapper-chrome-hack { padding-right: 6px }

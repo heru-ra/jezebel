@@ -35,7 +35,7 @@ function weatherForecast($woeid, $tempunit) {
     $rss->cache_time = 3600;
     
     // check if a temperature unit was specified
-    if ($tempunit == "f" || $tempunit == "c") {
+    if ($tempunit != "f" && $tempunit != "c") {
       // no unit was properly specified, default to Farenheit
       $tempunit = "f";
     }
@@ -77,6 +77,7 @@ function weatherForecast($woeid, $tempunit) {
 }
 
 function feedShows($venues) {
+  echo "              <ul>";
   // check if necessary values were passed
   if ($venues != false) {
     $rss = new lastRSS;
@@ -126,10 +127,11 @@ function feedShows($venues) {
       // sort new array, via leading timestamp keys
       ksort($rss_shows_sorted);
 
-      // format timestamps to a readable (lowercase) format then print shows
+      // format timestamps to readable formats then print shows
       foreach ($rss_shows_sorted as $key => $item) {
         $shortdate = strtolower(date("M d", $key));
-        echo "                <li class=\"table-row\"><div class=\"table-cell\"><strong>$shortdate</strong></div>$item</li>\n";
+        $longdate = date("D, M j, Y", $key);
+        echo "                <li class=\"table-row\"><div title=\"$longdate\" alt=\"$longdate\" class=\"table-cell\"><strong>$shortdate</strong></div>$item</li>\n";
       }
     } else {
       // couldn't load source feed, return error
@@ -139,6 +141,7 @@ function feedShows($venues) {
     // a necessary value was missing, return error
     return "                <li><span class=\"error\">Could not load shows feed:</span><br />No venues were provided in configuration.</li>\n";
   }
+  echo "              </ul>";
 }
 
 function feedReddit($feed, $user, $limit) {
@@ -192,7 +195,7 @@ function feedReddit($feed, $user, $limit) {
     // check if we could retrieve the source feed
     if ($json_reddit_comments != false) {
       // an array of the specific info tags we want to look for
-      $redditTags = array("kind","domain","selftext_html","thumbnail","permalink","is_self","url","title","link_title","subreddit","body_html","downs","link_id","created_utc","ups","num_comments");
+      $redditTags = array("kind","domain","selftext_html","thumbnail","permalink","is_self","url","title","link_title","subreddit","gilded","score","controversiality","body_html","link_id","created_utc","num_comments");
 
       // set up the iterator
       $jsonIterator = new RecursiveIteratorIterator(
@@ -219,24 +222,16 @@ function feedReddit($feed, $user, $limit) {
       }
 
       foreach ($json_reddit_sorted["items"] as $item) {
-        // calculate total karma received
-        $karmaTotal = $item[ups] - $item[downs];
-        
-        // make sure our singular/plural grammar is right for our total
-        // karma count
-        if ($karmaTotal == 1 || $karmaTotal == -1) {
-          $karmaTotal = "$karmaTotal point total";
-        } else {
-          $karmaTotal = "$karmaTotal points total";
-        }
-        
         // format comment date
-        $shortdate = date("m/d/y → g:iA", $item[created_utc]);
+        $shortdate = date("m/d/y &#8594; g:iA", $item[created_utc]);
           
         // if history item is a comment
         if ($item[kind] == "t1") {
           // format link id so it's url-friendly
           $item[link_id] = str_replace("t3_", "", $item[link_id]);
+          
+          // format quotation marks in post title so they're html-friendly
+          $item[link_title] = str_replace("\"", "&quot;", $item[link_title]);
           
           // do a little bit of crappy reddit-esque comment html formatting
           // and let us feel dishonor at the rudimentary way we are doing
@@ -252,45 +247,117 @@ function feedReddit($feed, $user, $limit) {
           $item[body_html] = str_replace("<strong>", "<b>", $item[body_html]);
           $item[body_html] = str_replace("</strong>", "</b>", $item[body_html]); 
           $item[body_html] = str_replace("<a href=\"/r/", "<a href=\"http://www.reddit.com/r/", $item[body_html]);
+          $item[body_html] = str_replace("<a href=\"/u/", "<a href=\"http://www.reddit.com/u/", $item[body_html]);
           $item[body_html] = preg_replace("'(<div class=\"md\">|</div>)'si", "", $item[body_html]);
 
-          // print the comment
-          echo "              <a href=\"http://www.reddit.com/$item[link_id]\" class=\"block reddit-title-link\"><span class=\"reddit-title\">$item[link_title]</span> in <em>/r/$item[subreddit]</em></a>\n";
+          // start to print the comment
+          echo "              <a href=\"http://www.reddit.com/$item[link_id]\" title=\"$item[link_title]\" alt=\"$item[link_title]\" class=\"block reddit-title-link\"><span class=\"reddit-title\">$item[link_title]</span></a>\n";
           echo "              <ul>\n";
           echo "                <li class=\"table-row\">\n";
-          echo "                  <div title=\"$karmaTotal\" alt=\"$karmaTotal\" class=\"table-cell\"><strong>⬆$item[ups]</strong><br /><span class=\"reddit-downvote\">⬇$item[downs]</span></div>\n";
-          echo "                  <span class=\"block\">$shortdate</span>\n";
-          echo "                  <div class=\"table-row\"><span class=\"table-cell reddit-icon\">↳</span><span class=\"table-cell reddit-comment\">$item[body_html]</span></div>\n";
+          echo "                  <div class=\"table-cell\">\n";
+          
+          // display appropriate arrow depending on karma score
+          if ($item[score] > 0) {
+            // received positive points
+            echo "                    <span class=\"reddit-upvote\">&#11014;$item[score]</span><br />\n";
+          } else {
+            if ($item[score] == 0) {
+              // received zero points
+              echo "                    <span class=\"reddit-zerovote\">&#11021;$item[score]</span><br />\n";
+            } else {
+              // received negative points
+              echo "                    <span class=\"reddit-downvote\">&#11015;$item[score]</span><br />\n";
+            }
+          }
+          
+          // if comment was controversial, show the Reddit Dagger of Controversy™
+          if ($item[controversiality] == 1) {
+            echo "                    <span title=\"Controversial submission\" alt=\"Controversial submission\" class=\"reddit-dagger\">&#8224;</span>\n";
+          }
+          
+          // if comment was gilded, show us
+          if ($item[gilded] > 0) {
+            // if comment was gilded more than once, show how many times
+            if ($item[gilded] > 1) {
+              echo "                    <span title=\"Gifted gold for this submission\" alt=\"Gifted gold for this submission\" class=\"reddit-gold\"><span class=\"reddit-goldstar\">&#9733;</span>&times;$item[gilded]</span>\n";
+            } else {
+              echo "                    <span title=\"Gifted gold for this submission\" alt=\"Gifted gold for this submission\" class=\"reddit-goldstar\">&#9733;</span>\n";
+            }
+          }
+          
+          echo "                  </div>\n";
+          echo "                  <span class=\"block\">$shortdate &#8594; /r/$item[subreddit]</span>\n";
+          echo "                  <div class=\"table-row\"><span class=\"table-cell reddit-icon\">&#8627;</span><span class=\"table-cell reddit-comment\">$item[body_html]</span></div>\n";
           echo "                </li>\n";
           echo "              </ul>\n";
         }
         
         // if history item is a link or self post
         if ($item[kind] == "t3") {
+          // format quotation marks in post title so they're html-friendly
+          $item[title] = str_replace("\"", "&quot;", $item[title]);
           
-          // if post is self/text post it needs a specific default thumbnail
+          // sort out our post thumbnails
           if ($item[thumbnail] == "self") {
-            $imageThumbnail = "<img src=\"http://i.imgur.com/fYM6L7b.png\">";
+            // post is a self-post
+            $imageThumbnail = "<img src=\"http://i.imgur.com/fYM6L7b.png\" class=\"post-link\">";
           } else {
-            $imageThumbnail = "<img src=\"$item[thumbnail]\" class=\"post-link\">";
+            if ($item[thumbnail] == "" || $item[thumbnail] == "default") {
+              // post thumbnail is unavailable or default
+              $imageThumbnail = "<img src=\"http://i.imgur.com/jG23lud.png\" class=\"post-link\">";
+            } else {
+              // post has a user content thumbnail
+              $imageThumbnail = "<img src=\"$item[thumbnail]\" class=\"post-link\">";
+            }
           }
           
           // check for post comments, and properly format our plurals
           $commentCount = "";
           if ($item[num_comments] != 0) {
             if ($item[num_comments] > 1) {
-              $commentCount = "<br />→ <a href=\"http://www.reddit.com$item[permalink]\"><em>$item[num_comments]</em> comments</a>";
+              $commentCount = "<br />&#8594; <a href=\"http://www.reddit.com$item[permalink]\"><em>$item[num_comments]</em> comments</a>";
             } else {
-              $commentCount = "<br />→ <a href=\"http://www.reddit.com$item[permalink]\"><em>$item[num_comments]</em> comment</a>";
+              $commentCount = "<br />&#8594; <a href=\"http://www.reddit.com$item[permalink]\"><em>$item[num_comments]</em> comment</a>";
             }
           }
           
           // start to print the post
-          echo "              <a href=\"http://www.reddit.com$item[permalink]\" class=\"block reddit-title-link\"><span class=\"reddit-title\">$item[title]</span> to <em>/r/$item[subreddit]</em></a>\n";
+          echo "              <a href=\"http://www.reddit.com$item[permalink]\" title=\"$item[title]\" alt=\"$item[title]\" class=\"block reddit-title-link\"><span class=\"reddit-title\">$item[title]</span></a>\n";
           echo "              <ul>\n";
           echo "                <li class=\"table-row\">\n";
-          echo "                  <div title=\"$karmaTotal\" alt=\"$karmaTotal\" class=\"table-cell\"><strong>⬆$item[ups]</strong><br /><span class=\"reddit-downvote\">⬇$item[downs]</span></div>\n";
-          echo "                  <span class=\"block\">$shortdate</span>\n";
+          echo "                  <div class=\"table-cell\">\n";
+          
+          // display appropriate arrow depending on karma score
+          if ($item[score] > 0) {
+            // received positive points
+            echo "                    <span class=\"reddit-upvote\">&#11014;$item[score]</span><br />\n";
+          } else {
+            if ($item[score] == 0) {
+              // received zero points
+              echo "                    <span class=\"reddit-zerovote\">&#11021;$item[score]</span><br />\n";
+            } else {
+              // received negative points
+              echo "                    <span class=\"reddit-downvote\">&#11015;$item[score]</span><br />\n";
+            }
+          }
+          
+          // if post was controversial, show the Reddit Dagger of Controversy™
+          if ($item[controversiality] == 1) {
+            echo "                    <span title=\"Controversial submission\" alt=\"Controversial submission\" class=\"reddit-dagger\">&#8224;</span>\n";
+          }
+          
+          // if post was gilded, show us
+          if ($item[gilded] > 0) {
+            // if post was gilded more than once, show how many times
+            if ($item[gilded] > 1) {
+              echo "                    <span title=\"Gifted gold for this submission\" alt=\"Gifted gold for this submission\" class=\"reddit-gold\"><span class=\"reddit-goldstar\">&#9733;</span>&times;$item[gilded]</span>\n";
+            } else {
+              echo "                    <span title=\"Gifted gold for this submission\" alt=\"Gifted gold for this submission\" class=\"reddit-goldstar\">&#9733;</span>\n";
+            }
+          }
+          
+          echo "                  </div>\n";
+          echo "                  <span class=\"block\">$shortdate &#8594; /r/$item[subreddit]</span>\n";
           echo "                  <div class=\"table-row\"><div class=\"table-row\"><span class=\"table-cell reddit-icon\"><a href=\"$item[url]\">$imageThumbnail</a></span><span class=\"table-cell reddit-post\">($item[domain])$commentCount</span></div></div>\n";
           
           // if the post is a self/text post, we also want to print the
@@ -308,10 +375,11 @@ function feedReddit($feed, $user, $limit) {
             $item[selftext_html] = str_replace("<strong>", "<b>", $item[selftext_html]);
             $item[selftext_html] = str_replace("</strong>", "</b>", $item[selftext_html]);
             $item[selftext_html] = str_replace("<a href=\"/r/", "<a href=\"http://www.reddit.com/r/", $item[selftext_html]);
+            $item[selftext_html] = str_replace("<a href=\"/u/", "<a href=\"http://www.reddit.com/u/", $item[selftext_html]);
             $item[selftext_html] = preg_replace("'(<!-- SC_ON -->|<!-- SC_OFF -->|<div class=\"md\">|</div>)'si", "", $item[selftext_html]);
           
             // print the self text
-            echo "                  <div class=\"table-row\"><div class=\"table-row\"><span class=\"table-cell reddit-icon\">↳</span><span class=\"table-cell reddit-comment\">$item[selftext_html]</span></div></div>\n";
+            echo "                  <div class=\"table-row\"><div class=\"table-row\"><span class=\"table-cell reddit-icon\">&#8627;</span><span class=\"table-cell reddit-comment\">$item[selftext_html]</span></div></div>\n";
           }
 
           echo "                </li>\n";
