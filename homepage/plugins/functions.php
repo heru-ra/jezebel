@@ -242,6 +242,7 @@ function feedReddit($feed, $user, $limit) {
           $item[body_html] = str_replace("&amp;gt;", "&gt;", $item[body_html]);
           $item[body_html] = str_replace("&amp;#39;", "'", $item[body_html]);
           $item[body_html] = str_replace("&amp;quot;", "\"", $item[body_html]);
+          $item[body_html] = str_replace("&amp;amp;", "&amp;", $item[body_html]);
           $item[body_html] = str_replace("<em>", "<i>", $item[body_html]);
           $item[body_html] = str_replace("</em>", "</i>", $item[body_html]);
           $item[body_html] = str_replace("<strong>", "<b>", $item[body_html]);
@@ -370,6 +371,7 @@ function feedReddit($feed, $user, $limit) {
             $item[selftext_html] = str_replace("&amp;gt;", "&gt;", $item[selftext_html]);
             $item[selftext_html] = str_replace("&amp;#39;", "'", $item[selftext_html]);
             $item[selftext_html] = str_replace("&amp;quot;", "\"", $item[selftext_html]);
+            $item[selftext_html] = str_replace("&amp;amp;", "&amp;", $item[selftext_html]);
             $item[selftext_html] = str_replace("<em>", "<i>", $item[selftext_html]);
             $item[selftext_html] = str_replace("</em>", "</i>", $item[selftext_html]);
             $item[selftext_html] = str_replace("<strong>", "<b>", $item[selftext_html]);
