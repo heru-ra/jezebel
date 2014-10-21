@@ -1,0 +1,33 @@
+GtkComboBox .separator {
+  border-color: @separator_outer;
+  -unico-inner-stroke-color: @transparent;
+}
+
+GtkComboBox .separator:prelight {
+  border-color: @border_prelight;
+  -unico-inner-stroke-color: @transparent;
+}
+
+GtkComboBox *:prelight {
+  color: @fg_prelight;
+}
+
+GtkComboBox *:insensitive {
+	color: @text_insensitive;
+}
+
+GtkComboBox.combobox-entry *:insensitive {
+	color: @text_insensitive;
+}
+
+GtkComboBox.combobox-entry .entry,
+GtkComboBox.combobox-entry .entry:prelight {
+  border-radius: 2px 0 0 2px;
+  border-right-style: none;
+  padding: 0 2px 0 2px;
+}
+
+GtkComboBox.combobox-entry .button {
+  padding: 0;
+  border-radius: 0 2px 2px 0;
+}

@@ -1,0 +1,297 @@
+/****************/
+/** The Basics **/
+/****************/
+
+* {
+  engine: unico;
+
+  -GtkArrow-arrow-scaling: 0.75;
+  
+  -GtkButton-child-displacement-x: 0;
+  -GtkButton-child-displacement-y: 0;
+  -GtkButton-default-border: 1;
+  -GtkButton-image-spacing: 4px;
+  -GtkButton-inner-border: 1;
+  -GtkButton-interior-focus: true;
+  
+  -GtkCheckButton-indicator-size: 14;
+  -GtkCheckButton-indicator-spacing: 3;
+  -GtkCheckMenuItem-indicator-size: 14;
+  
+  -GtkComboBox-arrow-scaling: 0.5;
+  -GtkComboBox-shadow-type: none;
+  
+  -GtkEntry-progress-border: 0;
+  
+  -GtkExpander-expander-size: 7; 
+    
+  -GtkMenuBar-internal-padding: 1;
+  -GtkMenu-horizontal-padding: 0;
+  -GtkMenu-vertical-padding: 0;
+  -GtkMenu-horizontal-offset: -4;
+	-GtkMenu-vertical-offset: 4;
+  -GtkMenuItem-toggle-spacing: 3;
+  -GtkMenuItem-arrow-scaling: 0.9;
+  
+  -GtkNotebook-tab-overlap: -1px;
+  
+  -GtkPaned-handle-size: 5px;
+  
+  -GtkProgressBar-min-horizontal-bar-height: 20;
+  -GtkProgressBar-min-vertical-bar-width: 22;
+  
+  -GtkScrolledWindow-scrollbar-spacing: 1;
+  -GtkScrolledWindow-scrollbars-within-bevel: 0;
+  
+  -GtkStatusbar-shadow-type: none;
+  
+  -GtkSwitch-slider-width: 14;
+  
+  -GtkTextView-error-underline-color: #AE4551;
+  
+  -GtkToolButton-icon-spacing: 6;
+  -GtkToolItemGroup-expander-size: 11;
+  -GtkToolbar-internal-padding: 0;
+  
+  -GtkTreeView-vertical-separator: 4;
+  -GtkTreeView-horizontal-separator: 2;
+  
+  -GtkWidget-focus-padding: 0;
+  
+  -GtkWidget-wide-separators: true;
+  -GtkWidget-separator-width: 4px;
+  -GtkWidget-separator-height: 4px;
+
+  -GtkWidget-link-color: @link_color;
+  -GtkWidget-visited-link-color: @visited_link_color;
+  -GtkIMHtml-hyperlink-color: @link_color;
+  -GtkHTML-link-color: @link_color;
+
+  -unico-bullet-color: @fg_normal;
+  -unico-bullet-outline-color: @transparent;
+  -unico-focus-border-color: @transparent;
+  -unico-focus-border-radius: 0;
+  -unico-focus-fill-color: @transparent;
+  -unico-focus-outer-stroke-color: @transparent;
+  -unico-inner-stroke-color: @transparent;
+  -unico-text-shadow-color: alpha (#fff, 0.30);
+}
+
+
+/* Widget/Object Base */
+
+* {
+  color: @text_normal;
+  background-color: @bg_normal;
+  padding: 1px;
+}
+
+*:insensitive {
+  color: @fg_insensitive;
+  background-color: @bg_insensitive;
+}
+
+*:selected,
+*:selected:focused {
+	color: @fg_selected;
+  background-color: @bg_selected;
+}
+
+
+/* Padding */
+
+.entry.progressbar,
+.notebook tab .button,
+.notebook tab .button:hover,
+.notebook tab .button:hover:active,
+.toolbar GtkComboBox {
+  padding: 0;
+}
+
+
+/* Selected Text */
+
+.button *:prelight,
+.button.noundo *:prelight,
+.expander row:selected,
+.expander row:selected:focused,
+.help_button *:prelight,
+.menubar *:active,
+.menubar *:prelight,
+.menu *:active,
+.menu *:prelight,
+.sidebar.view:selected,
+GtkInfoBar * {
+  color: @fg_selected;
+}
+
+
+/* Label */
+
+GtkLabel:insensitive {
+  color: @text_insensitive;
+}
+
+.dim-label {
+  color: @dim_label;
+}
+
+
+/* Frame */
+
+.frame {
+  padding: 1px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+  border-color: @separator_outer;
+  -unico-inner-stroke-color: @separator_inner;
+  -unico-inner-stroke-width: 1px 0 0 1px;
+  -unico-outer-stroke-color: @separator_inner;
+  -unico-outer-stroke-width: 0 1px 1px 0;
+}
+
+
+/* Expander */
+
+.expander {
+  color: @fg_normal;
+}
+
+.expander:prelight {
+  color: @fg_prelight;
+}
+
+GtkExpander .frame {
+	border-width: 0px;
+  -unico-inner-stroke-width: 0;
+  -unico-outer-stroke-width: 0;
+}
+
+
+/* Scrolling Border */
+
+GtkScrolledWindow.frame {
+  border-radius: 2px;
+	padding: 0px;
+	border-style: solid;
+  border-width: 1px;
+  background-color: @transparent;
+  border-color: @border_normal;
+  -unico-inner-stroke-width: 0;
+  -unico-outer-stroke-width: 0;
+}
+
+GtkScrolledWindow GtkViewport.frame {
+  border-style: none;
+}
+
+
+/* Grip */
+
+.grip {
+	background-color: @transparent;
+	-unico-centroid-texture: url("assets/grip.png");
+}
+
+
+/* Separator */
+
+.separator {
+  border-style: solid;
+  border-width: 1px;
+  border-color: @separator_outer;
+}
+
+
+/* Pane Separator */
+
+.pane-separator,
+.pane-separator:prelight,
+.pane-separator:selected {
+  background-color: @bg_normal;
+  -unico-centroid-texture: url("assets/pane-sep-v.png");
+}
+
+.pane-separator.vertical,
+.pane-separator.vertical:prelight,
+.pane-separator.vertical:selected {
+  background-color: @bg_normal;
+  -unico-centroid-texture: url("assets/pane-sep-h.png");
+}
+
+
+/* View */
+
+.view {
+  background-color: @base_normal;
+}
+
+.view:selected {
+  background-color: @bg_selected;
+}
+
+
+/* Images */
+
+GtkDrawingArea,
+GtkImage,
+GtkImage:insensitive,
+GtkImage:selected,
+GtkDrawingArea:backdrop,
+GtkImage:backdrop,
+GtkImage:insensitive:backdrop,
+GtkImage:selected:backdrop {
+  background-color: @transparent;
+}
+
+
+/* Font and File Choosers */
+
+GtkFontButton .separator,
+GtkFileChooserButton .separator {
+  border-color: @separator_outer;
+  -unico-inner-stroke-color: @transparent;
+}
+
+GtkFontButton .separator:prelight,
+GtkFileChooserButton .separator:prelight {
+  border-color: @border_prelight;
+  -unico-inner-stroke-color: @transparent;
+}
+
+GtkFontButton GtkLabel:last-child {
+  padding: 0;
+}
+
+GtkFileChooserButton GtkImage:last-child {
+}
+
+
+/*********************************************/
+/** Include Individual Widget/Object Styles **/
+/*********************************************/
+
+@import url("button.css");
+@import url("calendar.css");
+@import url("check-radio.css");
+@import url("colorchooser.css");
+@import url("combobox.css");
+@import url("entry.css");
+@import url("iconview.css");
+@import url("infobar.css");
+@import url("menu.css");
+@import url("notebook.css");
+@import url("notify.css");
+@import url("osd.css");
+@import url("progressbar.css");
+@import url("scale.css");
+@import url("scrollbar.css");
+@import url("sidebar.css");
+@import url("spinbutton.css");
+@import url("spinner.css");
+@import url("statusbar.css");
+@import url("switch.css");
+@import url("toolbar.css");
+@import url("tooltip.css");
+@import url("treeview.css");

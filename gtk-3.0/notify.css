@@ -1,0 +1,13 @@
+.notify {
+  border-radius: 2px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: alpha (@border_normal, 0.30);
+  background-color: alpha (#bg_normal, 0.95);
+}
+
+.notify .low {
+}
+
+.notify .critical {
+}

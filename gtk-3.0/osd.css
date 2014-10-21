@@ -1,0 +1,11 @@
+.osd {
+  border-radius: 2px;
+}
+
+.background.osd {
+  border-radius: 2px;
+}
+
+GtkOverlay.osd {
+  background-color: transparent;
+}

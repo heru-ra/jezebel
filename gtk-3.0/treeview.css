@@ -1,0 +1,44 @@
+GtkTreeView row:nth-child(even) {
+	background-color: @base_normal;
+}
+
+GtkTreeView row:nth-child(odd) {
+	background-color: shade (@base_normal, 0.93);
+}
+
+GtkTreeView row:selected {
+	border-width: 1px 0 1px 0;
+  border-style: solid;
+  border-color: shade (@bg_selected, 0.9);
+  background-color: @bg_selected ;
+}
+
+column-header .button {
+  border-radius: 0;
+	padding: 2px 0px 2px 3px;
+	border-width: 0 0 1px 0;
+  background-color: @bg_color;
+	border-color: shade (@bg_normal, 0.67);
+	border-right: 1px solid shade (@bg_normal, 0.84);
+	-unico-inner-stroke-color: shade (@bg_normal, 0.93);
+  -unico-inner-stroke-width: 0 0 2px 0;
+}
+
+column-header .button:hover {
+  border-width: 0 0 1px 0;
+  background-color: @bg_prelight;
+	border-color: shade (@bg_normal, 0.67);
+	border-right: 1px solid shade (@bg_normal, 0.84);
+	-unico-inner-stroke-color: shade (@bg_prelight, 0.93);
+  -unico-inner-stroke-width: 0 0 2px 0;
+}
+
+column-header:nth-child(last) .button {
+	border-right: 0px solid @transparent;
+}
+
+GtkTreeView column:sorted {
+  -unico-inner-stroke-color: alpha (#000, 0.07);
+  -unico-inner-stroke-width: 100px;
+}
+

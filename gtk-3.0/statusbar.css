@@ -1,0 +1,9 @@
+GtkStatusbar .frame {
+	color: @text_normal;
+  padding: 2px 0 0 0;
+  border-width: 0px;
+	-unico-inner-stroke-color: @separator_inner;
+  -unico-inner-stroke-width: 1px 0 0 0;
+  -unico-outer-stroke-color: @separator_outer;
+  -unico-outer-stroke-width: 1px 0 0 0;
+}

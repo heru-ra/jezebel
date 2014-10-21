@@ -1,0 +1,20 @@
+GtkViewport,
+GtkIconView {
+  padding: 0;
+  background-color: @transparent;
+}
+
+GtkIconView.view.cell:selected,
+GtkIconView.view.cell:selected:focused {
+  background-color: alpha (#000, 0.18);
+  border-radius: 0px;
+  color: @text_color;
+}
+
+.rubberband,
+.view.rubberband {
+  background-color: alpha (@bg_selected, 0.35);
+  border-color: @bg_selected;
+  border-style: solid;
+  border-width: 0px;
+}

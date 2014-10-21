@@ -1,0 +1,42 @@
+.sidebar column-header .button {
+	padding: 3px 0px 2px 1px;
+	border-width: 0 0 1px 0;
+  background-color: @bg_color;
+	border-color: @border_normal;
+	border-right: 1px solid shade (@bg_normal, 0.84);
+	-unico-inner-stroke-color: shade (@bg_normal, 0.93);
+  -unico-inner-stroke-width: 0 0 2px 0;
+}
+
+.sidebar,
+.sidebar.view {
+  background-color: @base_normal;
+  border-radius: 0;
+  color: @text_normal;
+}
+
+.sidebar.view:selected,
+.sidebar.view:prelight:selected {
+	border-width: 1px 0 1px 0;
+  border-style: solid;
+  border-color: shade (@bg_selected, 0.9);
+  background-color: @bg_selected ;
+}
+
+.sidebar-pane-separator,
+.sidebar-pane-separator:prelight,
+.sidebar-pane-separator:selected {
+  -GtkPaned-handle-size: 1;
+  border-width: 0;
+  background-image: none;
+  background-color: @bg_normal;
+  border-color: @bg_normal;
+  -unico-centroid-texture: none;
+}
+
+.sidebar.view.separator {
+  border-style: solid;
+  border-width: 1px;
+  border-color: shade (@base_normal, 0.73);
+  -unico-border-gradient: none;
+}

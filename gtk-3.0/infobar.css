@@ -1,0 +1,103 @@
+GtkInfoBar {
+  color: @text_normal
+}
+
+.info {
+  background-color: @infobar_info_bg;
+}
+
+.info .button {
+}
+
+.info .button:hover {
+}
+
+.info .button:active {
+}
+
+.info .button:active:hover {
+}
+
+.info .button.close {
+}
+
+.info .button.close:hover {
+}
+
+.info .button.close:active {
+}
+
+.warning {
+  background-color: @infobar_warning_bg;
+}
+
+.warning .button {
+}
+
+.warning .button:hover {
+}
+
+.warning .button:active {
+}
+
+.warning .button:active:hover {
+}
+
+.warning .button.close {
+}
+
+.warning .button.close:hover {
+}
+
+.warning .button.close:active {
+}
+
+.question {
+  background-color: @infobar_question_bg;
+}
+
+.question .button {
+}
+
+.question .button:hover {
+}
+
+.question .button:active {
+}
+
+.question .button:active:hover {
+}
+
+.question .button.close {
+}
+
+.question .button.close:hover {
+}
+
+.question .button.close:active {
+}
+
+.error {
+  background-color: @infobar_error_bg;
+}
+
+.error .button {
+}
+
+.error .button:hover {
+}
+
+.error .button:active {
+}
+
+.error .button:active:hover {
+}
+
+.error .button.close {
+}
+
+.error .button.close:hover {
+}
+
+.error .button.close:active {
+}

@@ -1,0 +1,60 @@
+.button,
+.button.menuitem.menubar {
+  padding: 1px;
+}
+
+.button {
+	border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+  background-color:         @bg_normal;
+  border-color: @border_normal;
+  -unico-inner-stroke-color: @lightborder_normal;
+  -unico-inner-stroke-width: 1px 1px 0 1px;
+}
+
+.button:hover:active,
+.button:hover {
+	color: @fg_prelight;
+  background-color: @bg_prelight;
+  border-color: @border_prelight;
+  -unico-inner-stroke-color: @lightborder_prelight;
+}
+
+.button:active {
+  background-color: @bg_active;
+  border-color: @border_active;
+  -unico-inner-stroke-width: 0;
+}
+
+.button GtkLabel:active {
+  color: @button_toggled_text;
+}
+
+.button GtkLabel:active:insensitive {
+  color: shade (@button_toggled_text, 0.6);
+}
+
+.button *:insensitive,
+.button:insensitive {
+	color: @text_insensitive;
+  background-color: @bg_insensitive;
+  border-color: @border_insensitive;
+  -unico-inner-stroke-color: @lightborder_insensitive;
+}
+
+GtkLinkButton.button:prelight {
+  border-color: @transparent;
+  background-color: @transparent;
+  -unico-inner-stroke-color: @transparent;
+}
+
+.help_button {
+}
+
+.help_button *:insensitive {
+}
+
+.button.noundo {
+}
+

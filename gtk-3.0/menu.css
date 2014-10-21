@@ -1,0 +1,65 @@
+.menubar {
+  -GtkWidget-window-dragging: true;
+  border-width: 0px;
+  -unico-outer-stroke-color: @separator_outer;
+  -unico-outer-stroke-width: 0 0 1px 0;
+}
+
+.menubar .menuitem {
+	padding: 4px 4px 5px 4px;
+  border-width: 0px;
+  border-style: none;
+}
+
+.menu .menuitem {
+	padding: 1px 3px 2px 3px;
+}
+
+.menu {
+	padding: 1px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+  border-color: shade (@border_normal, 1.26);
+}
+
+.menubar.menuitem:active,
+.menubar.menuitem:prelight {
+  border-radius: 2px;
+  background-color: @bg_prelight;
+}
+
+.menuitem:active,
+.menuitem:prelight {
+  border-radius: 2px;
+  background-color: @bg_prelight;
+}
+
+Genericmenuitem .menuitem .accelerator,
+DbusmenuGtkMenu .menuitem .accelerator,
+.menubar .menuitem .accelerator,
+.primary-toolbar .menuitem .accelerator {
+	color: @dim_label;
+}
+
+Genericmenuitem .menuitem .accelerator:prelight,
+DbusmenuGtkMenu .menuitem .accelerator:prelight,
+.menubar .menuitem .accelerator:prelight,
+.primary-toolbar .menuitem .accelerator:prelight {
+	color: shade (@fg_selected, 0.85);
+}
+
+.menu *:insensitive {
+	color: @text_insensitive;
+}
+
+.menu .separator {
+  -GtkMenuItem-horizontal-padding: 6;
+  padding: 0 0 0 0;
+  border-style: solid;
+  border-width: 1px;
+	-unico-inner-stroke-color: @separator_inner;
+  -unico-inner-stroke-width: 0 0 1px 0;
+  -unico-outer-stroke-color: @separator_outer;
+  -unico-outer-stroke-width: 0 0 1px 0;
+}

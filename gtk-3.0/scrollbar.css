@@ -1,0 +1,57 @@
+.scrollbar {
+  -GtkRange-slider-width: 10;
+  -GtkRange-stepper-size: 0;
+  -GtkRange-stepper-spacing: 0;
+  -GtkRange-trough-border: 1;
+  -GtkScrollbar-min-slider-length: 30;
+}
+
+.scrollbar.trough {
+	border-style: solid;
+  border-radius: 2px;
+  border-width: 1px;
+  background-color: @trough_bg;
+  border-color: @trough_border;
+}
+
+.scrollbar.slider {
+	border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+  background-color: @scrollbar_slider;
+  border-color: shade (@scrollbar_slider, 0.52);
+  background-image: -gtk-gradient (linear,
+                    center top, center bottom,
+                    from(@scrollbar_slider), to(shade (@scrollbar_slider, 0.9)));
+}
+
+.scrollbar.vertical.slider {
+  background-image: -gtk-gradient (linear,
+                    left center, right center,
+                    from(@scrollbar_slider), to(shade (@scrollbar_slider, 0.9)));
+}
+
+.scrollbar.slider:prelight {
+  background-color: @scrollbar_slider_prelight;
+  border-color: shade (@scrollbar_slider_prelight, 0.52);
+  background-image: -gtk-gradient (linear,
+                    center top, center bottom,
+                    from(@scrollbar_slider_prelight), to(shade (@scrollbar_slider_prelight, 0.9)));
+}
+
+.scrollbar.vertical.slider:prelight {
+  background-image: -gtk-gradient (linear,
+                    left center, right center,
+                    from(@scrollbar_slider_prelight), to(shade (@scrollbar_slider_prelight, 0.9)));
+}
+
+.scrollbar.slider:insensitive {
+  -GtkRange-slider-width: 0;
+}
+
+.scrollbar.trough:insensitive {
+  -GtkRange-trough-border: 0;
+  background-color: @transparent;
+  border-style: none;
+}
+

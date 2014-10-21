@@ -1,0 +1,45 @@
+.toolbar {
+	padding: 0 2px 2px 2px;
+  -unico-inner-stroke-color: @separator_outer;
+  -unico-inner-stroke-width: 0 0 1px 0;
+  -unico-outer-stroke-color: @separator_inner;
+  -unico-outer-stroke-width: 0 0 1px 0;
+}
+
+.toolbar .separator {
+  border-style: solid;
+  border-width: 1px;
+  border-color: @separator_outer;
+  -unico-inner-stroke-color: @separator_inner;
+  -unico-inner-stroke-width: 1px;
+}
+
+.toolbar *:insensitive,
+.toolbar .button:insensitive {
+  color: @text_insensitive;
+  border-color: @transparent;
+  background-color: @bg_normal;
+}
+
+.toolbar .button {
+  padding: 2px;
+	icon-shadow: none;
+}
+
+.secondary-toolbar.toolbar .button {
+  -GtkButton-inner-border: 0 3px 0 3px;
+  padding: 0 3px 0 3px;
+  -unico-outer-stroke-width: 0;
+}
+
+.secondary-toolbar.toolbar .button:hover {
+  color: shade (@selected_bg_color, 0.65);
+  border-color: @transparent;
+  background-image: none;
+  background-color: @transparent;
+  -unico-inner-stroke-width: 0;
+}
+
+.secondary-toolbar.toolbar .button:active,
+.secondary-toolbar.toolbar .button:hover:active {
+}

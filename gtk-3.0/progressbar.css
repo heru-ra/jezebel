@@ -1,0 +1,38 @@
+GtkProgressBar {
+  padding: 0px;
+  color: @text_normal;
+}
+
+GtkProgressBar.progressbar,
+.progressbar,
+.entry.progressbar,
+GtkProgressBar.progressbar:selected,
+.progressbar:selected,
+.entry.progressbar:selected {
+  color: @text_normal;
+  border-style: solid;
+  border-radius: 2px;
+  border-width: 1px;
+  border-color: @border_normal;
+  background-image: -gtk-gradient (linear,
+                    center top, center bottom,
+                    from(@progressbar_fill), to(shade (@progressbar_fill, 0.9)));
+}
+
+GtkProgressBar.vertical.progressbar {
+  background-image: -gtk-gradient (linear,
+                    left center, right center,
+                    from(@progressbar_fill), to(shade (@progressbar_fill, 0.9)));
+}
+
+
+GtkProgressBar.trough,
+.progressbar.trough,
+.entry.progressbar.trough {
+	border-style: solid;
+  border-radius: 2px;
+  border-width: 1px;
+  background-color: @trough_bg;
+  border-color: @trough_border;
+}
+

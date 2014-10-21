@@ -1,0 +1,40 @@
+.notebook {
+  background-color: @bg_normal;
+  border-style: solid;
+  border-radius: 2px;
+  border-width: 1px;
+  border-color: @border_normal;
+}
+
+.notebook tab {
+  border-radius: 2px;
+  background-color: @bg_insensitive;
+  padding: 2px;
+  border-color: @border_insensitive;
+}
+
+.notebook tab:active {
+	background-color: @bg_normal;
+	border-color: @border_normal;
+	padding: 2px 2px 3px 2px;
+}
+
+
+.notebook tab.bottom:active {
+	padding: 3px 2px 2px 2px;
+
+}
+
+.notebook tab.left:active {
+	padding: 2px 3px 2px 2px;
+
+}
+
+.notebook tab.right:active {
+	padding: 2px 2px 2px 3px;
+
+}
+
+.notebook tab .button:hover:active {
+  background-color:   alpha (#000, 0.10);
+}

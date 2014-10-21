@@ -1,0 +1,49 @@
+GtkSwitch {
+  font: normal;
+  color: @text_normal;
+  padding: 2px;
+}
+
+GtkSwitch:insensitive {
+	color: @text_insensitive;
+}
+
+GtkSwitch.trough {
+	border-style: solid;
+  border-radius: 2px;
+  border-width: 1px;
+  background-color: @trough_bg;
+  border-color: @trough_border;
+}
+
+GtkSwitch.trough:insensitive {
+  background-color: @trough_bg_insensitive;
+  border-color: @trough_border_insensitive;
+}
+
+GtkSwitch.trough:active {
+	color: @text_normal;
+  border-color: @trough_border;
+  -unico-inner-stroke-gradient: -gtk-gradient (linear,
+                                center top, center bottom,
+                                from(@progressbar_fill), to(shade (@progressbar_fill, 0.9)));
+  -unico-inner-stroke-width: 0 0 0 39px;
+}
+
+GtkSwitch.slider {
+	border-style: solid;
+  border-radius: 2px;
+  border-width: 1px;
+  background-color: @slider_bg;
+  border-color: @slider_border;
+  -unico-inner-stroke-color: @slider_lightborder;
+  -unico-inner-stroke-width: 1px 1px 0 1px;
+  -unico-centroid-texture: url("assets/slider-h.png");
+}
+
+GtkSwitch.slider:insensitive {
+  background-color: @slider_bg_insensitive;
+  border-color: @slider_border_insensitive;
+  -unico-inner-stroke-color: @slider_lightborder_insensitive;
+  -unico-centroid-texture: url("assets/slider-h-insensitive.png");
+}

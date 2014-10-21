@@ -1,0 +1,26 @@
+.entry {
+  border-style:solid;
+  border-width: 1px;
+  border-color: shade (@border_normal, 1.26);
+  border-radius: 2px;
+  padding: 2px;
+	background-color: @base_normal ;
+}
+
+.entry:insensitive {
+	color: @text_insensitive;
+}
+
+.security_trusted {
+  padding: 2px; 
+	background-color: @base_normal ;
+}
+
+.security_unknown {
+  padding: 2px;
+	background-color: @base_normal ;
+}
+
+.entry.image {
+  padding: 0;
+}
