@@ -9,7 +9,7 @@
 ##11/01/2014
 
 **CSS**
-+ Organized and cleaned up style.css, making alterations and additions  
++ Organized and cleaned up ./css/style.css, making alterations and additions  
   to style any new elements and features  
 + Changed border radius and color on a few elements, to reflect  
   changes made in my local theme
@@ -34,15 +34,15 @@
   handle the loading of associated feeds to the feed iframe, apply  
   all dynamic styling changes, set recall cookies, process custom  
   errors for temperamental feeds, and apply loading overlays  
-  + Added ./img/ajax-loader.gif as a feed loading animation and overlay  
+  + Added ./img/ajax-loader.gif as a feed loading animation overlay  
 + Added loadFeedChromeCheck(name,url,customerror) as a workaround  
-  for some quirks and inconsistencies with errors displays, in  
-  Chromium and dwb. Works as a frontend to loadFeed()  
+  for some quirks and inconsistencies with error displays in Chromium  
+  and dwb. Works as a frontend to loadFeed()  
 + Added $(window).resize() function, to call tabsAlign() if browser  
   dimensions change  
 + Added functions to $(document).ready() to automatically adjust  
-  #col-1 row heights and alignment (scripts.js line 175) and adjust  
-  #iframe-scratchpad height equal to it's contents (scripts.js line  
+  #col-1 row heights and alignment (./js/scripts.js line 175) and adjust  
+  #iframe-scratchpad height equal to it's contents (./js/scripts.js line  
   185)
   
 **PHP**
