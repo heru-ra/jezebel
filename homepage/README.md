@@ -9,76 +9,76 @@
 ##11/01/2014
 
 **CSS**
-+ Organized and cleaned up ./css/style.css, making alterations and additions  
++ Organized and cleaned up [./css/style.css](https://github.com/heru-ra/jezebel/blob/master/homepage/css/style.css), making alterations and additions  
   to style any new elements and features  
-+ Changed border radius and color on a few elements, to reflect  
-  changes made in my local theme
++ Changed border radius and color on a few elements, and webkit scrollbar  
+  styles to reflect changes made in my local theme
 
 **JS/JQUERY**
-+ Added isExternal(url) function to check if feed urls are internal or  
++ Added [isExternal(url)](https://github.com/heru-ra/jezebel/blob/master/homepage/js/scripts.js#L20-L26) function to check if feed urls are internal or  
   external domain sources  
-+ Recoded the search bar function searchSubmit(form) for increased  
-  flexibility, and to use a new search engine dropdown attributes and  
++ Recoded the search bar function [searchSubmit(form)](https://github.com/heru-ra/jezebel/blob/master/homepage/js/scripts.js#L29-L54) for increased  
+  flexibility, and to use new search engine dropdown attributes and  
   specifications  
   + Added quick-search engine scheme name support (see comments on  
-    line 24 of ./index.php for more info)  
+    [line 24 of ./index.php](https://github.com/heru-ra/jezebel/blob/master/homepage/index.php#L24-L33) for more info)  
   + Search engines can now be specified to submit using GET (instead  
-    of POST) via the data-method="GET" attribute setting  
+    of POST) via the [data-method="GET"](https://github.com/heru-ra/jezebel/blob/master/homepage/index.php#L29) attribute setting  
   + Last search engine now recalled via cookie  
-+ Added tabsAlign() function so that feed tabs automatically align  
++ Added [tabsAlign()](https://github.com/heru-ra/jezebel/blob/master/homepage/js/scripts.js#L57-L66) function so that feed tabs automatically align  
   themselves, no longer requiring manual adjustment when col height is  
   altered  
-+ Added feedError(title,text) function to handle and display feed  
++ Added [feedError(title,text)](https://github.com/heru-ra/jezebel/blob/master/homepage/js/scripts.js#L69-L74) function to handle and display feed  
   errors  
-+ Added loadFeed(name,url,customerror) function, used by tabs, to  
++ Added [loadFeed(name,url,customerror)](https://github.com/heru-ra/jezebel/blob/master/homepage/js/scripts.js#L77-L132) function, used by tabs, to  
   handle the loading of associated feeds to the feed iframe, apply  
   all dynamic styling changes, set recall cookies, process custom  
   errors for temperamental feeds, and apply loading overlays  
-  + Added ./img/ajax-loader.gif as a feed loading animation overlay  
-+ Added loadFeedChromeCheck(name,url,customerror) as a workaround  
+  + Added [./img/ajax-loader.gif](https://github.com/heru-ra/jezebel/blob/master/homepage/img/ajax-loader.gif) as a feed loading animation overlay  
++ Added [loadFeedChromeCheck(name,url,customerror)](https://github.com/heru-ra/jezebel/blob/master/homepage/js/scripts.js#L135-L151) as a workaround  
   for some quirks and inconsistencies with error displays in Chromium  
-  and dwb. Works as a frontend to loadFeed()  
-+ Added $(window).resize() function, to call tabsAlign() if browser  
+  and dwb. Works as a frontend to [loadFeed()](https://github.com/heru-ra/jezebel/blob/master/homepage/js/scripts.js#L77-L132)  
++ Added [$(window).resize()](https://github.com/heru-ra/jezebel/blob/master/homepage/js/scripts.js#L154-L158) function, to call [tabsAlign()](https://github.com/heru-ra/jezebel/blob/master/homepage/js/scripts.js#L57-L66) if browser  
   dimensions change  
-+ Added functions to $(document).ready() to automatically adjust  
-  #col-1 row heights and alignment (./js/scripts.js line 175) and adjust  
-  #iframe-scratchpad height equal to it's contents (./js/scripts.js line  
-  185)
++ Added functions to [$(document).ready()](https://github.com/heru-ra/jezebel/blob/master/homepage/js/scripts.js#L161-L190) to automatically adjust  
+  [#col-1-row-X](https://github.com/heru-ra/jezebel/blob/master/homepage/index.php#L39-L81) heights and alignment ([./js/scripts.js line 175](https://github.com/heru-ra/jezebel/blob/master/homepage/js/scripts.js#L175-L178)) and adjust  
+  [#iframe-scratchpad](https://github.com/heru-ra/jezebel/blob/master/homepage/index.php#L98) height equal to it's contents ([./js/scripts.js line  
+  185](https://github.com/heru-ra/jezebel/blob/master/homepage/js/scripts.js#L185-L189))
   
-**PHP**
-+ Moved all ./index.php settings variables to their own ./settings.php  
+**PHP/HTML**
++ Moved all [./index.php](https://github.com/heru-ra/jezebel/blob/master/homepage/index.php) settings variables to their own [./settings.php](https://github.com/heru-ra/jezebel/blob/master/homepage/settings.php)  
   file, for easier inclusion in other files  
-  + Added $time24hr var to adjust time display between 12 and 24 hour  
+  + Added [$time24hr](https://github.com/heru-ra/jezebel/blob/master/homepage/settings.php#L2-L3) var to adjust time display between 12 and 24 hour  
     formats  
-  + Added $dateFormat var to adjust date formats to either DMY, YMD,  
+  + Added [$dateFormat](https://github.com/heru-ra/jezebel/blob/master/homepage/settings.php#L4-L8) var to adjust date formats to either DMY, YMD,  
     or MDY  
-  + Added $weatherCacheTime var to set refresh rate of the weather  
+  + Added [$weatherCacheTime](https://github.com/heru-ra/jezebel/blob/master/homepage/settings.php#L29-L31) var to set refresh rate of the weather  
     feed data  
-  + Added $tabs array, which is used in the new tab generation system,  
+  + Added [$tabs](https://github.com/heru-ra/jezebel/blob/master/homepage/settings.php#L33-L40) array, which is used in the new tab generation system,  
     to create, delete, or edit tab names and feed URLs  
-  + Added $tabsCustomLoadErrors array, used to set special custom  
+  + Added [$tabsCustomLoadErrors](https://github.com/heru-ra/jezebel/blob/master/homepage/settings.php#L42-L50) array, used to set special custom  
     errors intended to be applied in conjunction with tabs/feeds  
-    hosted on external domains (see comments on line 42 of ./settings.php)  
-  + Added $showsCacheTime var to set refresh rate of the shows feed data  
-  + Added $scratchRows var to adjust the height of the scratchpad  
+    hosted on external domains (see comments on [line 42 of ./settings.php](https://github.com/heru-ra/jezebel/blob/master/homepage/settings.php#L42-L50))  
+  + Added [$showsCacheTime](https://github.com/heru-ra/jezebel/blob/master/homepage/settings.php#L76-L80) var to set refresh rate of the shows feed data  
+  + Added [$scratchRows](https://github.com/heru-ra/jezebel/blob/master/homepage/settings.php#L82-L84) var to adjust the height of the scratchpad  
     textarea  
-+ Added detectTabCookie($cookievalue, $tabarray, $customerrors)  
++ Added [detectTabCookie($cookievalue, $tabarray, $customerrors)](https://github.com/heru-ra/jezebel/blob/master/homepage/plugins/functions.php#L10-L56)  
   function to help us handle the loading of the last tab visited  
-+ Added generateTabs($tabarray, $customerrors) function to handle the  
-  automatic generation of feed tabs specified in the $tabs array  
-  of ./settings.php  
-+ Created workaround for bug where blank lastRSS results were being  
++ Added [generateTabs($tabarray, $customerrors)](https://github.com/heru-ra/jezebel/blob/master/homepage/plugins/functions.php#L58-L82) function to handle the  
+  automatic generation of feed tabs specified in the [$tabs](https://github.com/heru-ra/jezebel/blob/master/homepage/settings.php#L33-L40) array  
+  of [./settings.php](https://github.com/heru-ra/jezebel/blob/master/homepage/settings.php)  
++ Created workaround for bug where blank [lastRSS](https://github.com/heru-ra/jezebel/blob/master/homepage/plugins/lastRSS.php) results were being  
   cached while there was no internet connection (see comments on  
-  line 160 of ./plugins/functions.php)  
+  [line 160 of ./plugins/functions.php](https://github.com/heru-ra/jezebel/blob/master/homepage/plugins/functions.php#L160-L166))  
 + Tabbed feeds now load on demand from individual local .php files  
-  (./feeds) or external URLS, into the #iframe-feed-tabbed iframe, thus  
+  ([./feeds](https://github.com/heru-ra/jezebel/tree/master/homepage/feeds)) or external URLS, into the [#iframe-feed-tabbed](https://github.com/heru-ra/jezebel/blob/master/homepage/index.php#L90) iframe, thus  
   speeding up initial homepage load times and making feed system more  
   flexible  
 + Added Reddit feed links to user overview and to submission sub-reddits  
 + Replaced various unicode arrows and other symbols with their  
   equivalent (HTML-friendly) numeric character references  
-+ Cleaned up and altered bits and pieces of code in both ./index.php  
-  and ./plugins/functions.php to accomodate new features and functions,  
++ Cleaned up and altered bits and pieces of code in both [./index.php](https://github.com/heru-ra/jezebel/blob/master/homepage/index.php)  
+  and [./plugins/functions.php](https://github.com/heru-ra/jezebel/blob/master/homepage/plugins/functions.php) to accomodate new features and functions,  
   increase flexibility and compatibility, and make room for growth
   
 **NOTES**
