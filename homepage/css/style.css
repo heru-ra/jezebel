@@ -1,109 +1,134 @@
-* { line-height: 12px }
-
-body { background: #212121; color: #BDBDBD; font: 7pt "Verdana"; margin: 0; padding: 18px 0 18px 0 }
-div.wrapper { width: 100%; text-align: center }
-div.grid { display: inline-block; text-align: left; width: 560px; margin: 0 24px 0 24px }
-
-div.row-2, div.row-3 { margin-top: 12px }
-div.col-1, div.col-2 { display: table-cell }
-
-/*  use this to change the height of row 2 and it's 2 info column children  *
- *  note: if you do change the height, you will have to also tweak the      *
- *  top position of div.tabs-feed on line 26                                */
-div.row-2 { height: 410px }
-
-div.col-1 { width: 160px }
-div.col-2 { width: 400px; height: inherit }
-div.row-3 iframe { width: 100%; margin-top: 2px }
-
-div.feed-shows, div.feed-reddit { height: inherit; overflow: auto; overflow-x: hidden }
-div.feed-calendar { height: inherit }
-div.feed-calendar iframe { height: 100%; z-index: 1; position: relative; top: -36px }
-
-div.label-v { height: 0px; text-align: right; position: relative; transform: rotate(-90deg); -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg) }
-div.col-1 div.label-v { top: 80px; left: -108px }
-div.col-2 div.label-v { top: 200px; left: -228px }
-div.tabs-feed { height: 0px; position: relative; top: -212px; left: 214px; transform: rotate(90deg); -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg) }
-
-div.feed-calendar, div.feed-shows, div.feed-reddit, input, textarea { border: 1px solid #191919; background: #2C2C2C }
-div.row-1 input { width: 473px }
-div.row-1 select { float: right; width: 80px }
-
-div.iframe-wrapper { padding-right: 2px }
-div.iframe-wrapper div.label-h { float: left }
-div.iframe-wrapper textarea { font: 8pt "Verdana"; width: 100%; resize: none }
-div.iframe-wrapper button { float: right; margin-top: 6px; }
-
-.table-row { display: table-row }
-.table-cell { display: table-cell }
-.block, div.list-links li a { display: block }
-h3, div.tabs-feed li, span.reddit-title { display: inline-block }
-span.reddit-comment a { display: inline }
-
-div.feed-reddit p { margin-bottom: 0 }
-div.feed-reddit p:first-child { margin-top: 0 }
-
-div.feed-shows div.table-cell, div.feed-reddit div.table-cell { width: 30px; padding: 0 4px 0 4px }
-
-h1, h2, h3, ul, strong, div.feed-reddit blockquote { margin: 0 }
-span.reddit-post { vertical-align: top }
-div.feed-weather div.table-cell, span.reddit-comment blockquote { padding: 0 0 0 4px }
-h3, span.reddit-comment, span.reddit-post { padding: 6px 4px 6px 4px }
-span.reddit-comment blockquote { border-left: 2px solid #B5BAE1; margin-left: 4px }
-h1 { font: 20pt "Audimat Mono" }
-h3 { font: 14pt "Audimat Mono" }
-span.reddit-dagger, span.reddit-goldstar { font: 8pt "Verdana" }
-span.reddit-karma, span.reddit-downvote, span.reddit-zerovote, span.reddit-upvote, span.reddit-gold, span.reddit-title, div.tabs-feed li, h2, strong, span.reddit-comment code { font: 7pt "Audimat Mono" }
-span.reddit-title { white-space: nowrap; overflow: hidden; width: 375px; vertical-align: middle }
-h1, em, span.reddit-comment { color: #FFF }
-h2, h3, strong, span.reddit-title { color: #FFA203 }
-span.error { color: #AE4551 }
-span.reddit-downvote { color: #4551AE }
-span.reddit-zerovote { color: #7C7176 }
-span.reddit-upvote { color: #B4913F }
-span.reddit-dagger { color: #E1B5BA }
-span.reddit-gold { color: #E1DCB5 }
-em { font-style: normal }
-h2, strong { font-weight: normal }
-h1, h3, span.error { font-weight: bold }
-
-ul { list-style-type: none; padding: 0 }
-span.reddit-comment ul { list-style-type: disc; padding: 6px 0 6px 0; margin-left: 24px }
-div.list-links ul { padding: 0px 6px 6px 17px; width: 113px }
-div.list-links { padding-bottom: 6px }
-
-span.reddit-comment pre:first-child, span.reddit-comment ul:first-child { margin-top: 0; padding-top: 0 }
-span.reddit-comment pre:last-child, span.reddit-comment ul:last-child { margin-bottom: 0; padding-bottom: 0 }
-
-div.feed-shows li:nth-child(even), a.reddit-title-link { background: #292929 }
-div.tabs-feed li { background: #191919; padding: 0px 4px 0px 4px; margin-right: 1px; border: 1px solid #191919; -webkit-border-radius: 2px 2px 0 0; -moz-border-radius: 2px 2px 0 0; border-radius: 2px 2px 0 0; height: 12px }
-div.tabs-feed li.tabs-selected, li.tabs-selected > a { color: #FFA203; background: #2C2C2C; padding-top: 1px }
-div.tabs-feed li.tabs-unselected, li.tabs-unselected > a { color: #BDBDBD; background: #1D1D1D }
-
-a { text-decoration: none; padding: 0 2px 0 2px; color: #BDBDBD }
-a.reddit-title-link { padding: 0 4px 0 4px }
-span.reddit-comment a, span.reddit-post a, span.reddit-icon img { -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px }
-span.reddit-comment a, span.reddit-post a { background: #212121 }
-a:hover, a:hover > em, a:hover > span { color: #FFA203; background: #3C3C3C !important }
-span.reddit-icon img { margin: 6px 0 0 0; border: 1px solid #212121; background: #BDBDBD; -webkit-background-clip: padding-box; -moz-background-clip: padding; background-clip: padding-box }
-span.reddit-icon img.post-link { margin-bottom: 6px }
-span.reddit-icon a:hover img { border: 1px solid #3C3C3C }
-span.reddit-icon a:hover, div.tabs-feed a { background: transparent !important }
-
-/* give calendar a chance to load before showing error div */
-div.feed-calendar-error { -webkit-animation: delay 4s; -moz-animation: delay 4s; animation: delay 4s }
-@-webkit-keyframes delay { 0% { opacity: 0; } 99% { opacity: 0; } 100% { opacity: 1; } }
-@-moz-keyframes delay { 0% { opacity: 0; } 99% { opacity: 0; } 100% { opacity: 1; } }
-@keyframes delay { 0% { opacity: 0; } 99% { opacity: 0; } 100% { opacity: 1; } }
-
-/* chromium and webkit hacks */
-div.iframe-wrapper-chrome-hack { padding-right: 6px }
-select.iframe-wrapper-chrome-hack { border: 1px solid #191919; -webkit-border-radius: 2px; border-radius: 2px; background: #212121 }
-select.iframe-wrapper-chrome-hack:hover { border: 1px solid #2C2C2C; background: #3C3C3C }
-div.iframe-wrapper-chrome-hack button { border: 1px solid #191919; -webkit-border-radius: 3px; border-radius: 3px; background: #212121; margin-top: 4px; margin-right: -4px }
-div.iframe-wrapper-chrome-hack button:hover { border: 1px solid #2C2C2C; background: #3C3C3C }
-::-webkit-scrollbar { width: 13px; height: 13px }
-::-webkit-scrollbar-track-piece { border-top: 1px solid #191919; border-right: 1px solid #1C1C1C; border-bottom: 2px solid #1C1C1C; border-left: 1px solid #191919; background: #202020 }
-::-webkit-scrollbar-thumb { background: #60491F; border: 2px solid #1D1D1D }
-::-webkit-scrollbar-thumb:hover { background: #6E5120 }
-::-webkit-scrollbar-corner { background: #202020 }
+/* body, wrapper & grid foundation ---------------------------------- */
+  * { line-height: 12px }
+  body { background: #212121; color: #BDBDBD; font: 7pt "Verdana"; margin: 0; padding: 18px 0 18px 0 }
+  div.wrapper { width: 100%; text-align: center }
+  div.grid { text-align: left; width: 560px; margin: 0 24px 0 24px }
+/* display types ---------------------------------------------------- */
+  .table-row { display: table-row }
+  .table-cell { display: table-cell }
+  .block, div.list-links li a { display: block }
+  .inline-block, div.tabs li, span.reddit-title { display: inline-block }
+  .inline, span.reddit-comment a { display: inline }
+  #feed-loading, #feed-error-wrapper { display: none }
+/* dimensions ------------------------------------------------------- */
+  div.row-2 { height: 410px } /* changes the height of row 2 and it's column children */
+  div.label-vert { height: 0px }
+  div.tabs li { height: 12px }
+  div.tabs { height: 14px }
+  div.feed-tabbed iframe { height: 100% }
+  div.col-1, div.col-2, div.feed-tabbed, div.feed-loading, div.feed-error-wrapper, div.feed-error { height: inherit }
+  div.feed-shows div.table-cell, div.feed-reddit div.table-cell { width: 30px }
+  div.row-1 select { width: 100px }
+  div.list-links ul { width: 113px }
+  div.col-1 { width: 160px }
+  span.reddit-title { width: 375px }
+  div.feed-loading, div.feed-error-wrapper { width: 398px }
+  div.col-2 { width: 400px }
+  div.row-1 input { width: 453px }
+  div.row-3 iframe, div.scratchpad-wrapper textarea { width: 100% }
+  div.feed-error, div.weather-error { width: inherit }
+  div.col-1-row-2 { min-height: 100px }
+/* position --------------------------------------------------------- */
+  div.feed-loading, div.feed-error-wrapper, div.tabs { position: absolute }
+  div.label-vert { position: relative }
+  div.feed-loading { z-index: 2 }
+  div.feed-error-wrapper { z-index: 1 }
+  div.scratchpad-wrapper div.label-horiz { float: left }
+  div.row-1 select, div.scratchpad-wrapper button { float: right }
+  div.col-1 div.label-vert { top: 80px; left: -108px }
+  div.col-2 div.label-vert { top: 200px; left: -228px }
+/* margins & padding ------------------------------------------------ */
+  h1, h2, h3, ul, strong, div.feed-reddit blockquote { margin: 0 }
+  span.reddit-icon img { margin: 6px 0 0 0 }
+  div.feed-reddit p:first-child, span.reddit-comment pre:first-child, span.reddit-comment ul:first-child { margin-top: 0 }
+  div.row-3 iframe { margin-top: 2px }
+  div.scratchpad-wrapper button { margin-top: 6px }
+  div.row-2, div.row-3 { margin-top: 12px }
+  div.tabs li { margin-right: 1px }
+  div.feed-reddit p, span.reddit-comment pre:last-child, span.reddit-comment ul:last-child { margin-bottom: 0 }
+  span.reddit-icon img.post-link { margin-bottom: 6px }
+  span.reddit-comment blockquote { margin-left: 4px }
+  span.reddit-comment ul { margin-left: 24px }
+  ul { padding: 0 }
+  div.list-links ul { padding: 0px 6px 6px 17px }
+  div.feed-weather div.table-cell, span.reddit-comment blockquote { padding: 0 0 0 4px }
+  div.feed-shows div.table-cell { padding: 0 2px 0 4px }
+  div.feed-reddit div.table-cell, div.tabs li, a.reddit-title-link { padding: 0 4px 0 4px }
+  h3 { padding: 6px 4px 6px 4px }
+  span.reddit-comment, span.reddit-post { padding: 6px 10px 6px 4px }
+  span.reddit-comment ul { padding: 6px 0 6px 0 }
+  div.feed-shows li a { padding: 0 10px 0 2px }
+  a { padding: 0 2px 0 2px }
+  div.feed-error { padding: 6px 28px 6px 28px }
+  span.reddit-comment pre:first-child, span.reddit-comment ul:first-child { padding-top: 0 }
+  div.tabs li.tabs-selected, li.tabs-selected > a { padding-top: 1px }
+  div.scratchpad-wrapper { padding-right: 4px }
+  div.weather-error { padding-right: 4px }
+  span.reddit-comment pre:last-child, span.reddit-comment ul:last-child { padding-bottom: 0 }
+  div.list-links { padding-bottom: 6px }
+/* borders ---------------------------------------------------------- */
+  div.feed-tabbed, div.tabs li { border: 1px solid #191919 }
+  input, textarea { border: 1px solid #1B1B1B }
+  span.reddit-icon img { border: 1px solid #212121 }
+  span.reddit-icon a:hover img { border: 1px solid #3C3C3C }
+  span.reddit-comment blockquote { border-left: 2px solid #B5BAE1 }
+  div.tabs li { -webkit-border-radius: 2px 2px 0 0; -moz-border-radius: 2px 2px 0 0; border-radius: 2px 2px 0 0 }
+  span.reddit-comment a, span.reddit-post a, span.reddit-icon img, h3 a, a.reddit-sub, * input, * textarea, div.feeds { -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px }
+/* background colors & images --------------------------------------- */
+  div.feed-shows, div.feed-reddit, input, textarea, div.tabs li.tabs-selected, li.tabs-selected > a, div.feed-loading, div.feed-error-wrapper { background: #2C2C2C }
+  div.feed-shows li:nth-child(even), a.reddit-title-link { background: #292929 }
+  div.tabs li { background: #191919 }
+  div.tabs li.tabs-unselected, li.tabs-unselected > a { background: #1D1D1D }
+  span.reddit-comment a, span.reddit-post a { background: #212121 }
+  a:hover, a:hover > em, a:hover > span { background: #3C3C3C !important }
+  span.reddit-icon img { background: #BDBDBD; -webkit-background-clip: padding-box; -moz-background-clip: padding; background-clip: padding-box }
+  div.feed-tabbed { background: transparent }
+  span.reddit-icon a:hover, div.tabs a { background: transparent !important }
+  div.feed-loading { background-image: url('/img/ajax-loader.gif'); background-repeat: no-repeat; background-position: center }
+/* content alignment & flow ----------------------------------------- */
+  div.tabs, span.reddit-title { white-space: nowrap; overflow: hidden }
+  div.feed-error, div.weather-error { text-align: center }
+  div.label-vert { text-align: right }
+  span.reddit-post { vertical-align: top }
+  span.reddit-title, div.feed-error { vertical-align: middle }
+  div.label-vert { transform: rotate(-90deg); -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg) }
+  div.tabs { transform: rotate(90deg); -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg) }
+/* fonts ------------------------------------------------------------ */
+  div.scratchpad-wrapper textarea, span.reddit-dagger, span.reddit-goldstar { font: 8pt "Verdana" }
+  span.reddit-karma, span.reddit-downvote, span.reddit-zerovote, span.reddit-upvote, span.reddit-gold, span.reddit-title, div.tabs li, h2, strong, span.reddit-comment code { font: 7pt "Audimat Mono" }
+  h1 { font: 20pt "Audimat Mono" }
+  h3, span.error-title { font: 14pt "Audimat Mono" }
+  em { font-style: normal }
+  h2, strong { font-weight: normal }
+  h1, h3, span.error, span.error-title { font-weight: bold }
+/* text colors & decoration ----------------------------------------- */
+  h1, em, span.reddit-comment { color: #FFF }
+  span.error, span.error-title { color: #AE4551 }
+  span.error-text { color: #E1B5BA }
+  span.reddit-downvote { color: #4551AE }
+  span.reddit-zerovote { color: #7C7176 }
+  span.reddit-upvote { color: #B4913F }
+  span.reddit-dagger { color: #E1B5BA }
+  span.reddit-gold { color: #E1DCB5 }
+  div.tabs li.tabs-selected, li.tabs-selected > a, a:hover, a:hover > em, a:hover > span, h2, h3, h3 a, strong, span.reddit-title { color: #FFA203 }
+  h3 a { color: #FFA203 !important }
+  a, div.tabs li.tabs-unselected, li.tabs-unselected > a { color: #BDBDBD }
+  a { text-decoration: none }
+/* misc ------------------------------------------------------------- */
+  ul { list-style-type: none }
+  span.reddit-comment ul { list-style-type: disc }
+  div.scratchpad-wrapper textarea { resize: none }
+/* chromium and webkit hacks ---------------------------------------- */
+  div.scratchpad-wrapper-chrome-hack { padding-right: 6px }
+  select.scratchpad-wrapper-chrome-hack { border: 1px solid #191919; -webkit-border-radius: 2px; border-radius: 2px; background: #212121 }
+  select.scratchpad-wrapper-chrome-hack:hover { border: 1px solid #2C2C2C; background: #3C3C3C }
+  div.scratchpad-wrapper-chrome-hack button { border: 1px solid #191919; -webkit-border-radius: 3px; border-radius: 3px; background: #212121; margin-top: 4px; margin-right: -4px }
+  div.scratchpad-wrapper-chrome-hack button:hover { border: 1px solid #2C2C2C; background: #3C3C3C }
+  ::-webkit-scrollbar { width: 12px; height: 12px; background: #212121 }
+  ::-webkit-scrollbar-track { -webkit-border-radius: 2px }
+  ::-webkit-scrollbar-track-piece { border-top: 1px solid #191919; border-right: 1px solid #1C1C1C; border-bottom: 1px solid #1C1C1C; border-left: 1px solid #191919; background: #1D1D1D }
+  ::-webkit-scrollbar-thumb:vertical { -webkit-border-radius: 4px; background: -webkit-linear-gradient(left, #60491F, #54421E); background: -moz-linear-gradient(left, #60491F, #54421E); background: linear-gradient(left, #60491F, #54421E); border: 2px solid #1D1D1D }
+  ::-webkit-scrollbar-thumb:vertical:hover { background: -webkit-linear-gradient(left, #6E5120, #614920); background: -moz-linear-gradient(left, #6E5120, #614920); background: linear-gradient(left, #6E5120, #614920) }
+  ::-webkit-scrollbar-thumb:horizontal { -webkit-border-radius: 4px; background: -webkit-linear-gradient(top, #60491F, #54421E); background: -moz-linear-gradient(top, #60491F, #54421E); background: linear-gradient(top, #60491F, #54421E); border: 2px solid #1D1D1D }
+  ::-webkit-scrollbar-thumb:horizontal:hover { background: -webkit-linear-gradient(top, #6E5120, #614920); background: -moz-linear-gradient(top, #6E5120, #614920); background: linear-gradient(top, #6E5120, #614920) }
+  ::-webkit-scrollbar-corner { background: #202020 }
