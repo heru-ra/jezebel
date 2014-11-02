@@ -1,8 +1,8 @@
-#jezebel/homepage
+###jezebel/homepage
 
 ---
 
-![homepage](https://github.com/heru-ra/jezebel/blob/master/screenshot.png?raw=true)
+![homepage](https://github.com/heru-ra/jezebel/blob/master/homepage/screenshot.png "homepage")
 
 ---
 
@@ -80,11 +80,11 @@
   and ./plugins/functions.php to accomodate new features and functions,  
   increase flexibility and compatibility, and make room for growth
   
-**NOTES**
-As always, this is a work in progress, and even though I try to do
-extensive bug testing using Iceweasel, Chromium, and dwb, I very
-well may have missed something -- if you run across any bugs, please
-submit the issue, or troubleshoot them yourself and then submit a code
+**NOTES**  
+As always, this is a work in progress, and even though I try to do  
+extensive bug testing using Iceweasel, Chromium, and dwb, I very  
+well may have missed something -- if you run across any bugs, please  
+submit the issue, or troubleshoot them yourself and then submit a code  
 alteration
 
 ---
@@ -107,33 +107,33 @@ alteration
 
 **A COUPLE THINGS TO NOTE**
 
-Both the "cache" folder and the "scratchpad" file must be given
+Both the "cache" folder and the "scratchpad" file must be given  
 CHMOD 777 permissions, so they can be written to properly.
 
-My source uses curl and json routines, so make sure you have the
+My source uses curl and json routines, so make sure you have the  
 according php5 packages installed
 
-There are configuration variables that need to be set within
-the ./index.php source. They are at the very top, and are commented
+There are configuration variables that need to be set within  
+the ./index.php source. They are at the very top, and are commented  
 for your understanding and convenience.
 
-All the interesting stuff you may want to modify and tweak
-will probably be in ./plugins/functions.php and also have
+All the interesting stuff you may want to modify and tweak  
+will probably be in ./plugins/functions.php and also have  
 been detailedly commented.
 
-I have slightly modified the LastRSS plugin, and all
-modifications are noted at the top of the plugin file
+I have slightly modified the LastRSS plugin, and all  
+modifications are noted at the top of the plugin file  
 source itself.
 
-This homepage was designed for use with Firefox/Iceweasel. I
-have done my best to bug test with Chromium, and added a few
+This homepage was designed for use with Firefox/Iceweasel. I  
+have done my best to bug test with Chromium, and added a few  
 hacks so that it works (and looks) as fluidly as possible.
 
-Other webkit-based browsers seem to be hit or miss; for instance,
-dwb displays flawlessly, while surf still wants to cut off some of
-the scrollbar in our scratchpad when it overflows. Most issues you
-may encounter can probably be remedied by minor margin/padding
+Other webkit-based browsers seem to be hit or miss; for instance,  
+dwb displays flawlessly, while surf still wants to cut off some of  
+the scrollbar in our scratchpad when it overflows. Most issues you  
+may encounter can probably be remedied by minor margin/padding  
 tweaks in ./css/style.css.
 
-As always, this will continue to be a WIP and I will most likely
+As always, this will continue to be a WIP and I will most likely  
 push more update commits in future.
