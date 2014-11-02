@@ -15,7 +15,7 @@
   changes made in my local theme
 
 **JS/JQUERY**
-+ Added function isExternal(url) to check if feed urls are internal or  
++ Added isExternal(url) function to check if feed urls are internal or  
   external domain sources  
 + Recoded the search bar function searchSubmit(form) for increased  
   flexibility, and to use a new search engine dropdown attributes and  
@@ -48,7 +48,8 @@
 **PHP**
 + Moved all ./index.php settings variables to their own ./settings.php  
   file, for easier inclusion in other files  
-  + Added $time24hr var to adjust time display between 12 and 24 formats  
+  + Added $time24hr var to adjust time display between 12 and 24 hour  
+    formats  
   + Added $dateFormat var to adjust date formats to either DMY, YMD,  
     or MDY  
   + Added $weatherCacheTime var to set refresh rate of the weather  
@@ -57,7 +58,7 @@
     to create, delete, or edit tab names and feed URLs  
   + Added $tabsCustomLoadErrors array, used to set special custom  
     errors intended to be applied in conjunction with tabs/feeds  
-    hosted on external domains (see comments on line 42 of ./index.php)  
+    hosted on external domains (see comments on line 42 of ./settings.php)  
   + Added $showsCacheTime var to set refresh rate of the shows feed data  
   + Added $scratchRows var to adjust the height of the scratchpad  
     textarea  
