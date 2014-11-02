@@ -68,7 +68,7 @@
   of ./settings.php  
 + Created workaround for bug where blank lastRSS results were being  
   cached while there was no internet connection (see comments on  
-  line 150 of ./plugins/functions.php)  
+  line 160 of ./plugins/functions.php)  
 + Tabbed feeds now load on demand from individual local .php files  
   (./feeds) or external URLS, into the #iframe-feed-tabbed iframe, thus  
   speeding up initial homepage load times and making feed system more  
@@ -80,7 +80,8 @@
   and ./plugins/functions.php to accomodate new features and functions,  
   increase flexibility and compatibility, and make room for growth
   
-**NOTES**  
+**NOTES**
+
 As always, this is a work in progress, and even though I try to do  
 extensive bug testing using Iceweasel, Chromium, and dwb, I very  
 well may have missed something -- if you run across any bugs, please  
