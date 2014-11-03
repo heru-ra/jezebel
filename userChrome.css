@@ -1,4 +1,4 @@
-#page-proxy-favicon, #identity-box, #notification-popup-box, #window-controls, #appmenu-toolbar-button {
+#page-proxy-favicon, #identity-box, #notification-popup-box, #window-controls, #appmenu-toolbar-button, #PanelUI-menu-button, #back-button, #forward-button, .tab-close-button {
     display: none !important;
 }
 
@@ -10,38 +10,79 @@ box.scrollbox-innerbox {
     background-color: #191919 !important;
 }
 
-.tab-icon-image {
+.tab-icon-image, .tab-throbber {
     display: none !important;
 }
 
-.tab-throbber {
-    height: 8px !important;
-    width: 8px !important;
+tabpanels {
+	-moz-appearance: none !important;
 }
 
-.tabbrowser-tab {
-    -moz-appearance: none !important;
-    border: 0px !important;
-    border-radius: 0px !important;
-    padding: 0px 2px 0px 4px !important;
-    font: 7pt "Audimat Mono";
+.tabbrowser-tabs {
+    border: none !important;
+	margin-left: -15px !important;
     height: 12px !important;
     min-height: 12px !important;
-}
-
-.tabbrowser-tab:not([selected="true"]) {
+    max-height: 12px !important;
     background: transparent !important;
     background-color: #191919 !important;
 }
 
+.tabbrowser-tab {
+    border: none !important;
+    border-radius: 0px !important;
+    padding: 1px 2px 1px 0px !important;
+    font: 7pt "Audimat Mono";
+    height: 12px !important;
+    min-height: 12px !important;
+    max-height: 12px !important;
+}
+
+.tabbrowser-tab * {
+    border-radius: 0px !important;
+    height: 12px !important;
+    min-height: 12px !important;
+    max-height: 12px !important;
+}
+
+.tabbrowser-tab:not([selected="true"]) {
+    background-color: #191919 !important;
+}
+
 .tabbrowser-tab[selected="true"] {
-    background: transparent !important;
     background-color: #2C2C2C !important;
     color: #FFA203 !important;
 }
 
+.tab-text {
+	padding: 0 !important;
+}
+
+.tab-content {
+	padding: 0 4px 0 4px !important;
+}
+
+.tab-background-end[selected=true]:-moz-locale-dir(ltr):not(:-moz-lwtheme)::before,
+.tab-background-start[selected=true]:-moz-locale-dir(rtl):not(:-moz-lwtheme)::before, .tab-background-start[selected=true]:-moz-locale-dir(ltr):not(:-moz-lwtheme)::before,
+.tab-background-end[selected=true]:-moz-locale-dir(rtl):not(:-moz-lwtheme)::before, .tab-background-start[selected=true]:-moz-locale-dir(ltr):-moz-lwtheme::before,
+.tab-background-end[selected=true]:-moz-locale-dir(rtl):-moz-lwtheme::before, .tab-background-end[selected=true]:-moz-locale-dir(ltr):-moz-lwtheme::before,
+.tab-background-start[selected=true]:-moz-locale-dir(rtl):-moz-lwtheme::before,.tab-background-start[selected=true]:-moz-locale-dir(ltr)::after,
+.tab-background-end[selected=true]:-moz-locale-dir(rtl)::after,.tab-background-end[selected=true]:-moz-locale-dir(ltr)::after,
+.tab-background-start[selected=true]:-moz-locale-dir(rtl)::after, .tab-background-middle[selected=true], .tab-background-middle[selected=true]:-moz-lwtheme, .tab-background-start[selected=true]:-moz-lwtheme::before,
+.tab-background-end[selected=true]:-moz-lwtheme::before, #tabbrowser-tabs::before, .tabbrowser-tab:hover > .tab-stack > .tab-background:not([selected=true]){
+	background-image: none !important;
+	background-color: transparent !important;
+	background-size: 100% 100%;
+}
+
+.tabbrowser-tab > .tab-stack > .tab-background:not([selected=true]) {
+	background-image: none !important;
+	background-color: #191919 !important;
+	background-size: 100% 100%;
+}
+
 #nav-bar {
-    margin: 0px 0px 0px 0px !important;
+    margin: -1px 0px 0px 0px !important;
     height: 14px !important;
     min-height: 14px !important;
     padding: 0px !important;
@@ -54,7 +95,7 @@ textbox#urlbar, #searchbar > *, #search-box {
     border: none !important;
     border-radius: 0px !important;
     height: 14px !important;
-    margin: 0px !important;
+    margin: 0 0 0 5px !important;
 }
 
 .urlbar-textbox-container {
@@ -65,7 +106,7 @@ textbox#urlbar, #searchbar > *, #search-box {
     background-color: #2C2C2C!important;
 }
 
-#urlbar .autocomplete-history-dropmarker, #urlbar-icons {
+#urlbar .autocomplete-history-dropmarker, #urlbar-icons, #urlbar > toolbarbutton {
     display: none !important;
 }
 
@@ -81,7 +122,11 @@ textbox#urlbar, #searchbar > *, #search-box {
 /* floating and auto-hidden fullscreen navbar */
 
 #navigator-toolbox[inFullscreen="true"] {
-    transition: opacity .25s; opacity: .92; margin: 0 0 -27px !important; height: 27px !important; -moz-transform: translate(0) !important;
+    -webkit-transition: transform .3s ease-in-out !important;
+    transition: transform .3s ease-in-out !important;
+    margin: 0 0 -27px !important;
+    height: 27px !important;
+    transform: translate(0) !important;
 }
     
 #main-window[inFullscreen="true"] #navigator-toolbox #TabsToolbar, #main-window[inFullscreen="true"] #navigator-toolbox[tabsontop="false"] > #nav-bar {
@@ -97,13 +142,13 @@ textbox#urlbar, #searchbar > *, #search-box {
 }
 
 #navigator-toolbox[style*="margin"][inFullscreen="true"] {
-    -moz-transition: -moz-transform .45s .1s ease-out, opacity .45s .1s ease-out; -moz-transform: translateY(-100%) !important;
+    transform: translateY(-100%) !important;
 }
 
 #fullscr-toggler {
-    -moz-transform: translate(0) !important;
+    transform: translate(0) !important;
 }
 
 #navigator-toolbox[inFullscreen="true"]:hover {
-    opacity: 1; -moz-transform: translate(0) !important;
+    transform: translate(0) !important;
 }
