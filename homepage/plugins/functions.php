@@ -1,10 +1,20 @@
 <?php
 include "lastRSS.php";
 
+function row2heightvar($height) {
+  // if height value supplied and is given in px or em, then set it
+  if ($height != false && (substr($height, -2) == "em" || substr($height, -2) == "px")) {
+    echo "height: $height;";
+  } else {
+    // height not or incorrectly set, go default
+    echo "height: 400px;";
+  }
+}
+
 function encodeURIComponent($str) {
-    // encodes strings so they are URL friendly
-    $revert = array('%21'=>'!', '%2A'=>'*', '%27'=>"'", '%28'=>'(', '%29'=>')');
-    return strtr(rawurlencode($str), $revert);
+  // encodes strings so they are URL friendly
+  $revert = array('%21'=>'!', '%2A'=>'*', '%27'=>"'", '%28'=>'(', '%29'=>')');
+  return strtr(rawurlencode($str), $revert);
 }
 
 function detectTabCookie($cookievalue, $tabarray, $customerrors) {
@@ -97,7 +107,7 @@ function redditUnreadCount($feed, $user) {
   // check if necessary values were passed
   if ($feed != false && $user != false) {
     $rss = new lastRSS;
-    $rss_temp = $rss->get("http://www.reddit.com/message/unread/.rss?feed=$feed&user=$user");
+    $rss_temp = $rss->get("https://www.reddit.com/message/unread/.rss?feed=$feed&user=$user");
     // if unread count higher than 0, display counter
     if ($rss_temp[items_count] > 0) {
       echo " (<em>$rss_temp[items_count]</em>)";
@@ -141,9 +151,9 @@ function weatherForecast($woeid, $tempunit, $cachetime) {
 
         // give it the style we want
         $item[description] = preg_replace("', (.*?) 'si", ", <em>$1</em> &deg;", $item[description]);
-        $item[description] = str_replace("<b>Current Conditions:</b><br />\n", "                <div class=\"table-row\"><strong>now</strong><div class=\"table-cell\">", $item[description]);
+        $item[description] = str_replace("<b>Current Conditions:</b><br />\n", "                <div class=\"weather-now\"><div class=\"table-row\"><strong>now</strong><div class=\"table-cell\">", $item[description]);
         $item[description] = str_replace("<br />", "</em></div></div>", $item[description]);
-        $item[description] = str_replace("<BR />\n<BR /><b>Forecast:</b><BR />\n", "</div></div><br />\n", $item[description]);
+        $item[description] = str_replace("<BR />\n<BR /><b>Forecast:</b><BR />\n", "</div></div></div>\n", $item[description]);
         $item[description] = preg_replace("'(Mon|Tue|Wed|Thu|Fri|Sat|Sun) - 'esi", "'<div class=\"table-row\"><strong>'.strtolower('$1').'</strong><div class=\"table-cell\">'", $item[description]);
         $item[description] = str_replace(" High: ", "<br />High: <em>", $item[description]);
         $item[description] = str_replace(" Low: ", "</em> Low: <em>", $item[description]);
@@ -270,7 +280,7 @@ function feedReddit($feed, $user, $limit, $timesystem, $datesystem) {
   // check if necessary values were passed
   if ($feed != false && $user != false) {
     // check if a history limit was specified
-    if ($limit != false) {
+    if ($limit != false && is_int($limit)) {
       // if the history limit was set to over 100, default to 100,
       // and shame on you for not reading my configuration comments
       if ($limit > 100) {
@@ -392,6 +402,10 @@ function feedReddit($feed, $user, $limit, $timesystem, $datesystem) {
           $item[body_html] = str_replace("<a href=\"/r/", "<a href=\"http://www.reddit.com/r/", $item[body_html]);
           $item[body_html] = str_replace("<a href=\"/u/", "<a href=\"http://www.reddit.com/u/", $item[body_html]);
           $item[body_html] = preg_replace("'(<div class=\"md\">|</div>)'si", "", $item[body_html]);
+          $item[body_html] = str_replace("<table>", "<p><table>", $item[body_html]);
+          $item[body_html] = str_replace("</table>", "</table></p>", $item[body_html]);
+          $item[body_html] = str_replace("<del>", "<span class=\"reddit-strike\"><span class=\"reddit-striketext\">", $item[body_html]);
+          $item[body_html] = str_replace("</del>", "</span></span>", $item[body_html]); 
 
           // start to print the comment
           echo "      <a href=\"http://www.reddit.com/$item[link_id]\" title=\"$item[link_title]\" alt=\"$item[link_title]\" class=\"block reddit-title-link\"><span class=\"reddit-title\">$item[link_title]</span></a>\n";
@@ -429,7 +443,7 @@ function feedReddit($feed, $user, $limit, $timesystem, $datesystem) {
           }
           
           echo "            </div>\n";
-          echo "            <span class=\"block\">$shortdate &#8594; <a href=\"http://www.reddit.com/r/$item[subreddit]\" class=\"reddit-sub\">/r/$item[subreddit]</a></span>\n";
+          echo "            <span class=\"block\">$shortdate &#8649; <a href=\"http://www.reddit.com/r/$item[subreddit]\" class=\"reddit-sub\">/r/$item[subreddit]</a></span>\n";
           echo "            <div class=\"table-row\"><span class=\"table-cell reddit-icon\">&#8627;</span><span class=\"table-cell reddit-comment\">$item[body_html]</span></div>\n";
           echo "          </li>\n";
           echo "        </ul>\n";
@@ -443,7 +457,7 @@ function feedReddit($feed, $user, $limit, $timesystem, $datesystem) {
           // sort out our post thumbnails
           if ($item[thumbnail] == "self") {
             // post is a self-post
-            $imageThumbnail = "<img src=\"http://i.imgur.com/fYM6L7b.png\" class=\"post-link\">";
+            $imageThumbnail = "<img src=\"http://i.imgur.com/fYM6L7b.png\">";
           } else {
             if ($item[thumbnail] == "" || $item[thumbnail] == "default") {
               // post thumbnail is unavailable or default
@@ -458,9 +472,9 @@ function feedReddit($feed, $user, $limit, $timesystem, $datesystem) {
           $commentCount = "";
           if ($item[num_comments] != 0) {
             if ($item[num_comments] > 1) {
-              $commentCount = "<br />&#8594; <a href=\"http://www.reddit.com$item[permalink]\"><em>$item[num_comments]</em> comments</a>";
+              $commentCount = "<p>&#8594; <a href=\"http://www.reddit.com$item[permalink]\"><em>$item[num_comments]</em> comments</a></p>";
             } else {
-              $commentCount = "<br />&#8594; <a href=\"http://www.reddit.com$item[permalink]\"><em>$item[num_comments]</em> comment</a>";
+              $commentCount = "<p>&#8594; <a href=\"http://www.reddit.com$item[permalink]\"><em>$item[num_comments]</em> comment</a></p>";
             }
           }
           
@@ -500,8 +514,8 @@ function feedReddit($feed, $user, $limit, $timesystem, $datesystem) {
           }
           
           echo "          </div>\n";
-          echo "          <span class=\"block\">$shortdate &#8594; <a href=\"http://www.reddit.com/r/$item[subreddit]\" class=\"reddit-sub\">/r/$item[subreddit]</a></span>\n";
-          echo "          <div class=\"table-row\"><div class=\"table-row\"><span class=\"table-cell reddit-icon\"><a href=\"$item[url]\">$imageThumbnail</a></span><span class=\"table-cell reddit-post\">($item[domain])$commentCount</span></div></div>\n";
+          echo "          <span class=\"block\">$shortdate &#8649; <a href=\"http://www.reddit.com/r/$item[subreddit]\" class=\"reddit-sub\">/r/$item[subreddit]</a></span>\n";
+          echo "          <div class=\"table-row\"><div class=\"table-row\"><span class=\"table-cell reddit-icon\"><a href=\"$item[url]\">$imageThumbnail</a></span><span class=\"table-cell reddit-post\"><p>($item[domain])</p>$commentCount</span></div></div>\n";
           
           // if the post is a self/text post, we also want to print the
           // text it contained
@@ -518,6 +532,10 @@ function feedReddit($feed, $user, $limit, $timesystem, $datesystem) {
             $item[selftext_html] = str_replace("</em>", "</i>", $item[selftext_html]);
             $item[selftext_html] = str_replace("<strong>", "<b>", $item[selftext_html]);
             $item[selftext_html] = str_replace("</strong>", "</b>", $item[selftext_html]);
+            $item[selftext_html] = str_replace("<table>", "<p><table>", $item[selftext_html]);
+            $item[selftext_html] = str_replace("</table>", "</table></p>", $item[selftext_html]);
+            $item[selftext_html] = str_replace("<del>", "<span class=\"reddit-strike\"><span class=\"reddit-striketext\">", $item[selftext_html]);
+            $item[selftext_html] = str_replace("</del>", "</span></span>", $item[selftext_html]); 
             $item[selftext_html] = str_replace("<a href=\"/r/", "<a href=\"http://www.reddit.com/r/", $item[selftext_html]);
             $item[selftext_html] = str_replace("<a href=\"/u/", "<a href=\"http://www.reddit.com/u/", $item[selftext_html]);
             $item[selftext_html] = preg_replace("'(<!-- SC_ON -->|<!-- SC_OFF -->|<div class=\"md\">|</div>)'si", "", $item[selftext_html]);

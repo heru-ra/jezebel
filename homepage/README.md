@@ -6,6 +6,22 @@
 
 ---
 
+##11/07/2014
+
++ Added [$row2height](https://github.com/heru-ra/jezebel/blob/master/homepage/settings.php#L82-L85) var to [./settings.php](https://github.com/heru-ra/jezebel/blob/master/homepage/settings.php), which now sets the height of  
+  the #row-2 columns and their children, instead of being done in  
+  ./css/style.css  
++ Added function [row2heightvar($height)](https://github.com/heru-ra/jezebel/blob/master/homepage/plugins/functions.php#L4-L12) to [./plugins/functions.php](https://github.com/heru-ra/jezebel/blob/master/homepage/plugins/functions.php) to
+  handle above mentioned addition.
++ Converted many height measurements in [./css/style.css](https://github.com/heru-ra/jezebel/blob/master/homepage/css/style.css) from *px* to *em*,  
+  to make font and text changes easier and everything more adaptable.  
++ Further styled comment and self-post text contained in the Reddit feed  
+  and reworked a few minor aspects of it's layout.  
++ Changed formatting and hierarchy of a few php/html elements and css  
+  classes to accomodate previously mentioned changes, and to look better.
+
+---
+
 ##11/01/2014
 
 **CSS**

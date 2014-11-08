@@ -34,7 +34,7 @@
             </select>
           </form>
         </div>
-        <div id="row-2" class="row-2">
+        <div id="row-2" class="row-2" style="<?php echo row2heightvar($row2height); ?>">
           <div id="col-1" class="table-cell col-1">
             <div id="col-1-row-1" class="col-1-row-1">
               <div class="label-vert">
@@ -95,7 +95,7 @@
           </div>
         </div>
         <div class="row-3">
-          <iframe id="iframe-scratchpad" src="scratchpad.php" frameborder="0" scrolling="no" seamless></iframe>
+          <iframe id="iframe-scratchpad" src="scratchpad.php" width="100%" frameborder="0" scrolling="no" seamless></iframe>
         </div>
       </div>
     </div>

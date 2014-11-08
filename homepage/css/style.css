@@ -1,8 +1,8 @@
 /* body, wrapper & grid foundation ---------------------------------- */
   * { line-height: 12px }
-  body { background: #212121; color: #BDBDBD; font: 7pt "Verdana"; margin: 0; padding: 18px 0 18px 0 }
+  body { background: #212121; color: #BDBDBD; font: 7pt "Verdana"; margin: 0; padding: 1.5em 0 1.5em 0 }
   div.wrapper { width: 100%; text-align: center }
-  div.grid { text-align: left; width: 560px; margin: 0 24px 0 24px }
+  div.grid { text-align: left; width: 560px; margin: 0 2em 0 2em }
 /* display types ---------------------------------------------------- */
   .table-row { display: table-row }
   .table-cell { display: table-cell }
@@ -11,10 +11,9 @@
   .inline, span.reddit-comment a { display: inline }
   #feed-loading, #feed-error-wrapper { display: none }
 /* dimensions ------------------------------------------------------- */
-  div.row-2 { height: 410px } /* changes the height of row 2 and it's column children */
-  div.label-vert { height: 0px }
-  div.tabs li { height: 12px }
+  div.label-vert { height: 0 }
   div.tabs { height: 14px }
+  div.tabs li { height: 12px }
   div.feed-tabbed iframe { height: 100% }
   div.col-1, div.col-2, div.feed-tabbed, div.feed-loading, div.feed-error-wrapper, div.feed-error { height: inherit }
   div.feed-shows div.table-cell, div.feed-reddit div.table-cell { width: 30px }
@@ -38,45 +37,52 @@
   div.col-1 div.label-vert { top: 80px; left: -108px }
   div.col-2 div.label-vert { top: 200px; left: -228px }
 /* margins & padding ------------------------------------------------ */
-  h1, h2, h3, ul, strong, div.feed-reddit blockquote { margin: 0 }
-  span.reddit-icon img { margin: 6px 0 0 0 }
-  div.feed-reddit p:first-child, span.reddit-comment pre:first-child, span.reddit-comment ul:first-child { margin-top: 0 }
-  div.row-3 iframe { margin-top: 2px }
-  div.scratchpad-wrapper button { margin-top: 6px }
-  div.row-2, div.row-3 { margin-top: 12px }
+  h1, h2, h3, ul, strong, div.feed-reddit blockquote, span.reddit-post p { margin: 0 }
+  span.reddit-icon img { margin: 0.5em 0 0 0 }
+  div.feed-reddit p:first-child, span.reddit-comment pre:first-child, span.reddit-comment ul:first-child, span.reddit-comment ul + p, span.reddit-comment p { margin-top: 0 }
+  div.row-3 iframe { margin-top: 0.16em }
+  div.scratchpad-wrapper button { margin-top: 0.5em }
+  div.row-2, div.row-3, span.reddit-comment hr { margin-top: 1em }
   div.tabs li { margin-right: 1px }
   div.feed-reddit p, span.reddit-comment pre:last-child, span.reddit-comment ul:last-child { margin-bottom: 0 }
-  span.reddit-icon img.post-link { margin-bottom: 6px }
-  span.reddit-comment blockquote { margin-left: 4px }
-  span.reddit-comment ul { margin-left: 24px }
+  span.reddit-icon img.post-link, span.reddit-comment ul li p { margin-bottom: 0.5em }
+  span.reddit-comment p { margin-bottom: 0.8em }
+  span.reddit-comment hr { margin-bottom: 1em}
+  span.reddit-comment blockquote { margin-left: 0.55em }
+  span.reddit-comment ul { margin-left: 2em }
   ul { padding: 0 }
-  div.list-links ul { padding: 0px 6px 6px 17px }
-  div.feed-weather div.table-cell, span.reddit-comment blockquote { padding: 0 0 0 4px }
-  div.feed-shows div.table-cell { padding: 0 2px 0 4px }
-  div.feed-reddit div.table-cell, div.tabs li, a.reddit-title-link { padding: 0 4px 0 4px }
-  h3 { padding: 6px 4px 6px 4px }
-  span.reddit-comment, span.reddit-post { padding: 6px 10px 6px 4px }
-  span.reddit-comment ul { padding: 6px 0 6px 0 }
-  div.feed-shows li a { padding: 0 10px 0 2px }
-  a { padding: 0 2px 0 2px }
-  div.feed-error { padding: 6px 28px 6px 28px }
+  div.list-links ul { padding: 0 0.5em 0.5em 1.85em }
+  div.feed-weather div.table-cell, span.reddit-comment blockquote { padding: 0 0 0 0.55em }
+  div.feed-shows div.table-cell { padding: 0 0.275em 0 0.55em }
+  div.feed-reddit div.table-cell, div.tabs li, a.reddit-title-link { padding: 0 0.55em 0 0.55em }
+  h3 { padding: 0.25em 0.16em 0.25em 0.16em }
+  span.reddit-comment, span.reddit-post { padding: 0.5em 0.833em 0 0.55em }
+  span.reddit-comment ul { padding: 0.5em 0 0.5em 0 }
+  div.feed-shows li a { padding: 0 0.833em 0 0.275em }
+  a { padding: 0 0.275em 0 0.275em }
+  div.feed-error { padding: 0.5em 2.33em 0.5em 2.33em }
+  span.reddit-comment th, span.reddit-comment td { padding: 0.16em 0.55em 0.16em 0.55em }
   span.reddit-comment pre:first-child, span.reddit-comment ul:first-child { padding-top: 0 }
   div.tabs li.tabs-selected, li.tabs-selected > a { padding-top: 1px }
-  div.scratchpad-wrapper { padding-right: 4px }
-  div.weather-error { padding-right: 4px }
+  div.scratchpad-wrapper { padding-right: 0.55em }
+  div.weather-error { padding-right: 0.55em }
   span.reddit-comment pre:last-child, span.reddit-comment ul:last-child { padding-bottom: 0 }
-  div.list-links { padding-bottom: 6px }
+  span.reddit-post p { padding-bottom: 0.33em }
+  div.list-links { padding-bottom: 0.5em }
+  div.weather-now { padding-bottom: 1em }
 /* borders ---------------------------------------------------------- */
   div.feed-tabbed, div.tabs li { border: 1px solid #191919 }
   input, textarea { border: 1px solid #1B1B1B }
   span.reddit-icon img { border: 1px solid #212121 }
-  span.reddit-icon a:hover img { border: 1px solid #3C3C3C }
+  span.reddit-icon a:hover img { border: 1px solid #96691A }
   span.reddit-comment blockquote { border-left: 2px solid #B5BAE1 }
+  span.reddit-comment hr { border-style: solid }
+  span.reddit-comment th, span.reddit-comment td { border: 1px solid #3C3C3C }
   div.tabs li { -webkit-border-radius: 2px 2px 0 0; -moz-border-radius: 2px 2px 0 0; border-radius: 2px 2px 0 0 }
-  span.reddit-comment a, span.reddit-post a, span.reddit-icon img, h3 a, a.reddit-sub, * input, * textarea, div.feeds { -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px }
+  span.reddit-comment table, span.reddit-comment a, span.reddit-post a, span.reddit-icon img, h3 a, a.reddit-sub, * input, * textarea, div.feeds, span.reddit-comment hr { -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px }
 /* background colors & images --------------------------------------- */
   div.feed-shows, div.feed-reddit, input, textarea, div.tabs li.tabs-selected, li.tabs-selected > a, div.feed-loading, div.feed-error-wrapper { background: #2C2C2C }
-  div.feed-shows li:nth-child(even), a.reddit-title-link { background: #292929 }
+  div.feed-shows li:nth-child(even), span.reddit-comment th, span.reddit-comment tr:nth-child(even), a.reddit-title-link { background: #292929 }
   div.tabs li { background: #191919 }
   div.tabs li.tabs-unselected, li.tabs-unselected > a { background: #1D1D1D }
   span.reddit-comment a, span.reddit-post a { background: #212121 }
@@ -109,7 +115,13 @@
   span.reddit-zerovote { color: #7C7176 }
   span.reddit-upvote { color: #B4913F }
   span.reddit-dagger { color: #E1B5BA }
-  span.reddit-gold { color: #E1DCB5 }
+  span.reddit-gold { color: #BDBDBD }
+  span.reddit-goldstar { color: #E1DCB5 }
+  span.reddit-strike { color: #FFF; text-decoration: line-through }
+  span.reddit-striketext { color: #BDBDBD }
+  span.reddit-comment code { color: #bae1b5 }
+  span.reddit-comment blockquote { color: #B5BAE1 }
+  span.reddit-comment hr { color: #4C4C4C }
   div.tabs li.tabs-selected, li.tabs-selected > a, a:hover, a:hover > em, a:hover > span, h2, h3, h3 a, strong, span.reddit-title { color: #FFA203 }
   h3 a { color: #FFA203 !important }
   a, div.tabs li.tabs-unselected, li.tabs-unselected > a { color: #BDBDBD }
@@ -122,7 +134,7 @@
   div.scratchpad-wrapper-chrome-hack { padding-right: 6px }
   select.scratchpad-wrapper-chrome-hack { border: 1px solid #191919; -webkit-border-radius: 2px; border-radius: 2px; background: #212121 }
   select.scratchpad-wrapper-chrome-hack:hover { border: 1px solid #2C2C2C; background: #3C3C3C }
-  div.scratchpad-wrapper-chrome-hack button { border: 1px solid #191919; -webkit-border-radius: 3px; border-radius: 3px; background: #212121; margin-top: 4px; margin-right: -4px }
+  div.scratchpad-wrapper-chrome-hack button { border: 1px solid #191919; -webkit-border-radius: 3px; border-radius: 3px; background: #212121; margin-top: 0.33em; margin-right: -0.33em }
   div.scratchpad-wrapper-chrome-hack button:hover { border: 1px solid #2C2C2C; background: #3C3C3C }
   ::-webkit-scrollbar { width: 12px; height: 12px; background: #212121 }
   ::-webkit-scrollbar-track { -webkit-border-radius: 2px }

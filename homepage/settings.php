@@ -58,7 +58,7 @@
   // number of reddit comments in history to show in feed
   // -- the higher you go, the more noticible the lag in load time
   // ** max is 100 **
-  $redditFeedLimit = 10;
+  $redditFeedLimit = 25;
 
   // venues to use in shows feed -- visit
   // http://acousti.co/songkick
@@ -78,6 +78,11 @@
   // because the feeds are notoriously slow, and don't
   // get updated frequently
   $showsCacheTime = 10800;
+  
+  // height in px or em you want the #row-2 columns to be,
+  // i.e. the links + weather feed and the tabbed feeds
+  // -- default is 400px
+  $row2height = "400px";
 
   // height in rows you want the scratchpad to be
   // -- default is 6
