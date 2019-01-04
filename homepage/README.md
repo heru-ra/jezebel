@@ -1,4 +1,4 @@
-###jezebel/homepage
+### jezebel/homepage
 
 ---
 
@@ -6,7 +6,7 @@
 
 ---
 
-##11/07/2014
+## 11/07/2014
 
 + Added [$row2height](https://github.com/heru-ra/jezebel/blob/master/homepage/settings.php#L82-L85) var to [./settings.php](https://github.com/heru-ra/jezebel/blob/master/homepage/settings.php), which now sets the height of  
   the #row-2 columns and their children, instead of being done in  
@@ -22,7 +22,7 @@
 
 ---
 
-##11/01/2014
+## 11/01/2014
 
 **CSS**
 + Organized and cleaned up [./css/style.css](https://github.com/heru-ra/jezebel/blob/master/homepage/css/style.css), making alterations and additions  
@@ -107,7 +107,7 @@ alteration
 
 ---
 
-##10/06/2014
+## 10/06/2014
 
 + Added calendar feed, that makes use of Google Calendar
 + Fixed Reddit karma score handling
@@ -121,7 +121,7 @@ alteration
 
 ---
 
-##05/12/2014
+## 05/12/2014
 
 **A COUPLE THINGS TO NOTE**
 
